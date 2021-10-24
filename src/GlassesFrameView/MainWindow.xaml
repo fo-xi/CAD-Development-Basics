@@ -6,7 +6,7 @@
 		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 		xmlns:local="clr-namespace:GlassesFrameView"
 		mc:Ignorable="d"
-		Title="MainWindow" Height="260" Width="320">
+		Title="Оправа для очков" Height="260" Width="320">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
@@ -45,7 +45,8 @@
 					<xctk:IntegerUpDown 
 						Name="BridgeLength" 
 						Grid.Column="1"
-						Width="100"/>
+						Width="100"
+						AllowTextInput="False"/>
 				</Grid>
 
 				<Grid 
@@ -65,7 +66,8 @@
 					<xctk:IntegerUpDown 
 						Name="LensWidth" 
 						Grid.Column="1"
-						Width="100"/>
+						Width="100"
+						AllowTextInput="False"/>
 				</Grid>
 
 				<Grid 
@@ -85,7 +87,8 @@
 					<xctk:IntegerUpDown 
 						Name="LensFrameWidth" 
 						Grid.Column="1"
-						Width="100"/>
+						Width="100"
+						AllowTextInput="False"/>
 				</Grid>
 
 				<Grid 
@@ -105,7 +108,8 @@
 					<xctk:IntegerUpDown 
 						Name="FramWidth" 
 						Grid.Column="1"
-						Width="100"/>
+						Width="100"
+						AllowTextInput="False"/>
 				</Grid>
 
 				<Grid 
@@ -125,7 +129,8 @@
 					<xctk:IntegerUpDown 
 						Name="EndPieceLength" 
 						Grid.Column="1"
-						Width="100"/>
+						Width="100"
+						AllowTextInput="False"/>
 				</Grid>
 			</Grid>
 		</GroupBox>

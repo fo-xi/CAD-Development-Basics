@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlassesFrame", "GlassesFrame\GlassesFrame.csproj", "{C58E002E-3175-4E18-979D-E5974D8DD5F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlassesFrameView", "GlassesFrameView\GlassesFrameView.csproj", "{5159474D-2C20-4C4E-A76C-EDCEA8E0B59F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C58E002E-3175-4E18-979D-E5974D8DD5F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C58E002E-3175-4E18-979D-E5974D8DD5F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C58E002E-3175-4E18-979D-E5974D8DD5F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C58E002E-3175-4E18-979D-E5974D8DD5F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5159474D-2C20-4C4E-A76C-EDCEA8E0B59F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5159474D-2C20-4C4E-A76C-EDCEA8E0B59F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5159474D-2C20-4C4E-A76C-EDCEA8E0B59F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5159474D-2C20-4C4E-A76C-EDCEA8E0B59F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {333742C7-0A9F-4C38-85F9-2A173DE38275}
+	EndGlobalSection
+EndGlobal

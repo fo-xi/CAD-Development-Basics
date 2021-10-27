@@ -6,10 +6,11 @@
 		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 		xmlns:local="clr-namespace:GlassesFrameView"
 		mc:Ignorable="d"
-		Title="Оправа для очков" Height="260" Width="320">
+		Title="Оправа для очков" Height="290" Width="340">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
@@ -35,6 +36,7 @@
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*" />
 						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
 
 					<TextBlock 
@@ -42,11 +44,18 @@
 						Text="Длина моста" 
 						HorizontalAlignment="Left"/>
 
-					<xctk:IntegerUpDown 
+					<TextBox 
 						Name="BridgeLength" 
 						Grid.Column="1"
 						Width="100"
-						AllowTextInput="False"/>
+						Text ="100"
+						Background="#eaa"/>
+
+					<TextBlock 
+						Grid.Column="2"
+						Text="мм" 
+						Margin="5 0 0 0"
+						HorizontalAlignment="Left"/>
 				</Grid>
 
 				<Grid 
@@ -56,6 +65,7 @@
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*" />
 						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
 
 					<TextBlock 
@@ -63,11 +73,18 @@
 						Text="Ширина линзы" 
 						HorizontalAlignment="Left"/>
 
-					<xctk:IntegerUpDown 
+					<TextBox
 						Name="LensWidth" 
 						Grid.Column="1"
 						Width="100"
-						AllowTextInput="False"/>
+						Text="сто"
+						Background="#eaa"/>
+
+					<TextBlock 
+						Grid.Column="2"
+						Text="мм" 
+						Margin="5 0 0 0"
+						HorizontalAlignment="Left"/>
 				</Grid>
 
 				<Grid 
@@ -77,6 +94,7 @@
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*" />
 						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
 
 					<TextBlock 
@@ -84,11 +102,17 @@
 						Text="Ширина рамы линзы" 
 						HorizontalAlignment="Left"/>
 
-					<xctk:IntegerUpDown 
+					<TextBox 
 						Name="LensFrameWidth" 
 						Grid.Column="1"
 						Width="100"
-						AllowTextInput="False"/>
+						Text="56"/>
+
+					<TextBlock 
+						Grid.Column="2"
+						Text="мм" 
+						Margin="5 0 0 0"
+						HorizontalAlignment="Left"/>
 				</Grid>
 
 				<Grid 
@@ -98,6 +122,7 @@
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*" />
 						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
 
 					<TextBlock 
@@ -105,11 +130,17 @@
 						Text="Ширина оправы" 
 						HorizontalAlignment="Left"/>
 
-					<xctk:IntegerUpDown 
+					<TextBox 
 						Name="FrameWidth" 
 						Grid.Column="1"
 						Width="100"
-						AllowTextInput="False"/>
+						Text="3"/>
+
+					<TextBlock 
+						Grid.Column="2"
+						Text="мм" 
+						Margin="5 0 0 0"
+						HorizontalAlignment="Left"/>
 				</Grid>
 
 				<Grid 
@@ -119,6 +150,7 @@
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*" />
 						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
 
 					<TextBlock 
@@ -126,11 +158,17 @@
 						Text="Длина концевого элемента" 
 						HorizontalAlignment="Left"/>
 
-					<xctk:IntegerUpDown 
+					<TextBox 
 						Name="EndPieceLength" 
 						Grid.Column="1"
 						Width="100"
-						AllowTextInput="False"/>
+						Text="5"/>
+
+					<TextBlock 
+						Grid.Column="2"
+						Text="мм" 
+						Margin="5 0 0 0"
+						HorizontalAlignment="Left"/>
 				</Grid>
 			</Grid>
 		</GroupBox>
@@ -143,6 +181,18 @@
 				HorizontalAlignment="Right"
 				Width="80"
 				Content="Построить"/>
+		</Grid>
+
+		<Grid
+			Grid.Row="2"
+			Height="40">
+			<TextBlock
+				Background ="#eaa"
+				Padding="2">
+				<Run>Длина моста не входит в диспазон от 10мм до 16мм</Run>
+				<LineBreak/>
+				<Run>Можно вводить только числовые значения</Run>
+			</TextBlock>
 		</Grid>
 	</Grid>
 </Window>

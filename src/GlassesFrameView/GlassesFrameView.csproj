@@ -119,6 +119,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\GlassesFrameViewModel\GlassesFrameViewModel.csproj">
+      <Project>{445252a0-4099-4915-93cc-3f240693ba18}</Project>
+      <Name>GlassesFrameViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

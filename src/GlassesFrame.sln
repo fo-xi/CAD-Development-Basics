@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlassesFrame", "GlassesFram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlassesFrameView", "GlassesFrameView\GlassesFrameView.csproj", "{5159474D-2C20-4C4E-A76C-EDCEA8E0B59F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlassesFrameViewModel", "GlassesFrameViewModel\GlassesFrameViewModel.csproj", "{445252A0-4099-4915-93CC-3F240693BA18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventorApi", "InventorApi\InventorApi.csproj", "{B622A0B8-5F42-4756-9829-CCE276383A3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{5159474D-2C20-4C4E-A76C-EDCEA8E0B59F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5159474D-2C20-4C4E-A76C-EDCEA8E0B59F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5159474D-2C20-4C4E-A76C-EDCEA8E0B59F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{445252A0-4099-4915-93CC-3F240693BA18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{445252A0-4099-4915-93CC-3F240693BA18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{445252A0-4099-4915-93CC-3F240693BA18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{445252A0-4099-4915-93CC-3F240693BA18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B622A0B8-5F42-4756-9829-CCE276383A3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B622A0B8-5F42-4756-9829-CCE276383A3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B622A0B8-5F42-4756-9829-CCE276383A3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B622A0B8-5F42-4756-9829-CCE276383A3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

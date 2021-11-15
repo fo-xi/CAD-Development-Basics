@@ -17,7 +17,7 @@
 		<GroupBox 
 			Grid.Row="0"
 			Margin="5"
-			Header="Выберите действие">
+			Header="Введите параметры">
 
 			<Grid 
 				Margin="5">
@@ -47,15 +47,11 @@
 					<TextBox 
 						Name="BridgeLength" 
 						Grid.Column="1"
-						Width="100"
-						Text ="100"
-						Background="#eaa"/>
+						Style="{StaticResource TextBoxStyle}"/>
 
 					<TextBlock 
 						Grid.Column="2"
-						Text="мм" 
-						Margin="5 0 0 0"
-						HorizontalAlignment="Left"/>
+						Style="{StaticResource TextBlockStyle}"/>
 				</Grid>
 
 				<Grid 
@@ -76,15 +72,11 @@
 					<TextBox
 						Name="LensWidth" 
 						Grid.Column="1"
-						Width="100"
-						Text="сто"
-						Background="#eaa"/>
+						Style="{StaticResource TextBoxStyle}"/>
 
 					<TextBlock 
 						Grid.Column="2"
-						Text="мм" 
-						Margin="5 0 0 0"
-						HorizontalAlignment="Left"/>
+						Style="{StaticResource TextBlockStyle}"/>
 				</Grid>
 
 				<Grid 
@@ -105,14 +97,11 @@
 					<TextBox 
 						Name="LensFrameWidth" 
 						Grid.Column="1"
-						Width="100"
-						Text="56"/>
+						Style="{StaticResource TextBoxStyle}"/>
 
 					<TextBlock 
 						Grid.Column="2"
-						Text="мм" 
-						Margin="5 0 0 0"
-						HorizontalAlignment="Left"/>
+						Style="{StaticResource TextBlockStyle}"/>
 				</Grid>
 
 				<Grid 
@@ -133,14 +122,11 @@
 					<TextBox 
 						Name="FrameWidth" 
 						Grid.Column="1"
-						Width="100"
-						Text="3"/>
+						Width="100"/>
 
 					<TextBlock 
 						Grid.Column="2"
-						Text="мм" 
-						Margin="5 0 0 0"
-						HorizontalAlignment="Left"/>
+						Style="{StaticResource TextBlockStyle}"/>
 				</Grid>
 
 				<Grid 
@@ -161,14 +147,11 @@
 					<TextBox 
 						Name="EndPieceLength" 
 						Grid.Column="1"
-						Width="100"
-						Text="5"/>
+						Width="100"/>
 
 					<TextBlock 
 						Grid.Column="2"
-						Text="мм" 
-						Margin="5 0 0 0"
-						HorizontalAlignment="Left"/>
+						Style="{StaticResource TextBlockStyle}"/>
 				</Grid>
 			</Grid>
 		</GroupBox>

@@ -23,7 +23,6 @@ namespace GlassesFrameView
         public MainWindow()
         {
             InitializeComponent();
-            MessageBox.Show("Не получается построить модель. Посмотрите ошибки.", "Ошбика", MessageBoxButton.OK ,MessageBoxImage.Error);
         }
     }
 }

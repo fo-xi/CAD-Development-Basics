@@ -75,11 +75,6 @@ namespace InventorApi
             Sketch.SketchCircles.AddByCenterRadius(centerPoint, diameter);
         }
 
-        public void DrawRectangle(Point2d pointOne, Point2d pointTwo)
-        {
-            Sketch.SketchLines.AddAsTwoPointRectangle(pointOne, pointTwo);
-        }
-
         public void DrawLine(Point2d startPoint, Point2d endPoint)
         {
             Sketch.SketchLines.AddByTwoPoints(startPoint, endPoint);
@@ -93,7 +88,5 @@ namespace InventorApi
             extrudeDef.SetDistanceExtent(distance, PartFeatureExtentDirectionEnum.kPositiveExtentDirection);
             PartDefinition.Features.ExtrudeFeatures.Add(extrudeDef);
         }
-
-
     }
 }

@@ -20,7 +20,7 @@ namespace InventorApi
 
         public TransientGeometry TransientGeometry { get; set; }
 
-        private PlanarSketch Sketch { get; set; }
+        public PlanarSketch Sketch { get; set; }
 
         public ObjectCollection CreateObjectCollection()
         {
@@ -70,9 +70,9 @@ namespace InventorApi
             return sketch;
         }
 
-        public void DrawCircle(Point2d centerPoint, double diameter)
+        public void DrawCircle(Point2d centerPoint, double radius)
         {
-            Sketch.SketchCircles.AddByCenterRadius(centerPoint, diameter);
+            Sketch.SketchCircles.AddByCenterRadius(centerPoint, radius);
         }
 
         public void DrawLine(Point2d startPoint, Point2d endPoint)

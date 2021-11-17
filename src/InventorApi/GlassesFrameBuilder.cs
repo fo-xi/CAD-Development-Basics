@@ -10,7 +10,7 @@ namespace InventorApi
 {
     public class GlassesFrameBuilder
     {
-        private InventorConnector _connector;
+        private InventorConnector _connector = new InventorConnector();
 
         private Point2d _centerPointFirstСircle;
 
@@ -18,18 +18,22 @@ namespace InventorApi
 
         public void Build(GlassesFrameParameters parameters)
         {
-
+            _connector.CreateNewDocument();
+            BuildLensFrame(50, 12, 4);
         }
 
         private void BuildLensFrame(double diameter, double bridgeLength, double endPieceLength)
         {
+            _connector.Sketch = _connector.MakeNewSketch(1);
+            var sketch = _connector.Sketch;
+
+            var radius = diameter / 2;
             var bridgeWidth = 4;
             var heightLowerPartBridge = 2;
 
             //Строим первую внешнюю окружность
-            _centerPointFirstСircle = _connector.TransientGeometry.CreatePoint2d();
-            var radius = diameter / 2;
-            _connector.DrawCircle(_centerPointFirstСircle, diameter);
+            _centerPointFirstСircle = _connector.TransientGeometry.CreatePoint2d(0, 0);
+            _connector.DrawCircle(_centerPointFirstСircle, radius);
 
             var xCoordFirstPointTopBridge = 
                 FindPointXCircleCenteredOrigin(radius, heightLowerPartBridge + bridgeWidth);

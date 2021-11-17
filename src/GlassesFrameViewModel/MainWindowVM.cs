@@ -16,7 +16,7 @@ namespace GlassesFrameViewModel
     {
         private GlassesFrameParameters _glassesFrameParameters;
 
-        private GlassesFrameBuilder _glassesFrameBuilder;
+        private GlassesFrameBuilder _glassesFrameBuilder = new GlassesFrameBuilder();
 
         private IMessageBoxService _messageBoxService;
 
@@ -55,7 +55,7 @@ namespace GlassesFrameViewModel
 
         private void Apply()
         {
-
+            _glassesFrameBuilder.Build(_glassesFrameParameters);
         }
     }
 }

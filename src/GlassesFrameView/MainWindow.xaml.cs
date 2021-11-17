@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GlassesFrameView.Service;
+using GlassesFrameViewModel;
 
 namespace GlassesFrameView
 {
@@ -20,9 +22,13 @@ namespace GlassesFrameView
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainWindowVM _mainWindow = new MainWindowVM(new MessageBoxService());
+
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = _mainWindow;
         }
     }
 }

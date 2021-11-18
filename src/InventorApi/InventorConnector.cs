@@ -22,11 +22,6 @@ namespace InventorApi
 
         public PlanarSketch Sketch { get; set; }
 
-        public ObjectCollection CreateObjectCollection()
-        {
-            return InventorApplication.TransientObjects.CreateObjectCollection();
-        }
-
         public void CreateNewDocument()
         {
             InventorApplication = null;
@@ -62,7 +57,6 @@ namespace InventorApi
 
         public PlanarSketch MakeNewSketch(double offset)
         {
-            //[1 - ZY; 2 - ZX; 3 - XY]
             int planeNumber = 3;
             var mainPlane = PartDefinition.WorkPlanes[planeNumber];
             var offsetPlane = PartDefinition.WorkPlanes.AddByPlaneAndOffset(mainPlane, offset);
@@ -72,12 +66,28 @@ namespace InventorApi
 
         public void DrawCircle(Point2d centerPoint, double radius)
         {
-            Sketch.SketchCircles.AddByCenterRadius(centerPoint, radius);
+            var mmCenterPoint = TransientGeometry.CreatePoint2d(centerPoint.X / 10.0,
+                centerPoint.Y / 10.0);
+            radius /= 10.0;
+            Sketch.SketchCircles.AddByCenterRadius(mmCenterPoint, radius);
         }
 
         public void DrawLine(Point2d startPoint, Point2d endPoint)
         {
-            Sketch.SketchLines.AddByTwoPoints(startPoint, endPoint);
+            var mmStartPoint = TransientGeometry.CreatePoint2d(startPoint.X / 10.0,
+                startPoint.Y / 10.0);
+            var mmEndPoint = TransientGeometry.CreatePoint2d(endPoint.X / 10.0,
+                endPoint.Y / 10.0);
+            Sketch.SketchLines.AddByTwoPoints(mmStartPoint, mmEndPoint);
+        }
+
+        public void DrawRectangle(Point2d pointOne, Point2d pointTwo)
+        {
+            var mmPointOne = TransientGeometry.CreatePoint2d(pointOne.X / 10.0,
+                pointOne.Y / 10.0);
+            var mmPointTwo = TransientGeometry.CreatePoint2d(pointTwo.X / 10.0,
+                pointTwo.Y / 10.0);
+            Sketch.SketchLines.AddAsTwoPointRectangle(mmPointOne, mmPointTwo);
         }
 
         public void Extrude(double distance)
@@ -85,7 +95,7 @@ namespace InventorApi
             var sketchProfile = Sketch.Profiles.AddForSolid();
             var extrudeDef = PartDefinition.Features.ExtrudeFeatures.CreateExtrudeDefinition(sketchProfile,
                 PartFeatureOperationEnum.kJoinOperation);
-            extrudeDef.SetDistanceExtent(distance, PartFeatureExtentDirectionEnum.kPositiveExtentDirection);
+            extrudeDef.SetDistanceExtent(distance / 10.0, PartFeatureExtentDirectionEnum.kPositiveExtentDirection);
             PartDefinition.Features.ExtrudeFeatures.Add(extrudeDef);
         }
     }

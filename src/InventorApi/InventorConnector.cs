@@ -63,7 +63,7 @@ namespace InventorApi
         public PlanarSketch MakeNewSketch(double offset)
         {
             //[1 - ZY; 2 - ZX; 3 - XY]
-            int planeNumber = 1;
+            int planeNumber = 3;
             var mainPlane = PartDefinition.WorkPlanes[planeNumber];
             var offsetPlane = PartDefinition.WorkPlanes.AddByPlaneAndOffset(mainPlane, offset);
             var sketch = PartDefinition.Sketches.Add(offsetPlane);

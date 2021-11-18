@@ -24,8 +24,7 @@ namespace InventorApi
 
         private void BuildLensFrame(double diameter, double bridgeLength, double endPieceLength)
         {
-            _connector.Sketch = _connector.MakeNewSketch(1);
-            var sketch = _connector.Sketch;
+            _connector.Sketch = _connector.MakeNewSketch(0);
 
             var radius = diameter / 2;
             var bridgeWidth = 4;
@@ -36,53 +35,49 @@ namespace InventorApi
             _connector.DrawCircle(_centerPointFirstСircle, radius);
 
             var xCoordFirstPointTopBridge = 
-                FindPointXCircleCenteredOrigin(radius, heightLowerPartBridge + bridgeWidth);
+                FindPointXCircleCenteredOrigin(radius, heightLowerPartBridge + bridgeWidth, 1);
             //Точка начала верхней части моста
             var firstPointTopBridge = 
                 _connector.TransientGeometry.CreatePoint2d(xCoordFirstPointTopBridge,
                     heightLowerPartBridge + bridgeWidth);
 
-            var xCoordSecondPointTopBridge =
-                FindPointXCircleCenteredOrigin(radius, xCoordFirstPointTopBridge + bridgeLength);
             //Точка конца верхней части  моста
             var secondPointBeginninBridge =
-                _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointTopBridge,
+                _connector.TransientGeometry.CreatePoint2d(xCoordFirstPointTopBridge + bridgeLength,
                     heightLowerPartBridge + bridgeWidth);
 
+            //Строим вторую внешнюю окружность
+            var xCoordCenter =
+                FindPointX0Circle(secondPointBeginninBridge.X, secondPointBeginninBridge.Y, radius, 1);
+            _centerPointSecondCircle =
+                _connector.TransientGeometry.CreatePoint2d(xCoordCenter, 0);
+            _connector.DrawCircle(_centerPointSecondCircle, radius);
 
             var xCoordFirstPointBottomBridge =
-                FindPointXCircleCenteredOrigin(radius, heightLowerPartBridge);
+                FindPointXCircleCenteredOrigin(radius, heightLowerPartBridge, 1);
             //Точка начала нижней части моста
             var firstPointBottomBridge = 
                 _connector.TransientGeometry.CreatePoint2d(xCoordFirstPointBottomBridge,
                     heightLowerPartBridge);
 
-            
-            var xCoordSecondPointBottomBridge = 
-                FindPointXCircleCenteredOrigin(radius, xCoordFirstPointTopBridge + bridgeLength);
+            var xCoordSecondPointBottomBridge =
+                FindPointXCircle(xCoordCenter, firstPointBottomBridge.Y, radius, -1);
             //Точка конца нижней части моста
             var secondPointBottomBridge = 
                 _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointBottomBridge,
-                    heightLowerPartBridge + bridgeWidth);
+                    heightLowerPartBridge);
 
             //Строим верхнюю линию моста
             _connector.DrawLine(firstPointTopBridge, secondPointBeginninBridge);
             //Строим нижнюю линию моста
             _connector.DrawLine(firstPointBottomBridge, secondPointBottomBridge);
 
-            //Строим вторую внешнюю окружность
-            var xCoordCenter = 
-                FindPointX0Circle(secondPointBeginninBridge.X, secondPointBottomBridge.Y, radius);
-            _centerPointSecondCircle = 
-                _connector.TransientGeometry.CreatePoint2d(xCoordCenter, 0);
-            _connector.DrawCircle(_centerPointSecondCircle, diameter);
-
             //Строим концевой элемент
             var endPieceWidth = 3;
 
             //Строим верхнюю линию концевого элемента окружности с началом координат в точке (0, 0)
             var xCoordSecondPointTopEndPiece1 = 
-                FindPointXCircleCenteredOrigin(radius, endPieceWidth / 2);
+                FindPointXCircleCenteredOrigin(radius, endPieceWidth / 2, -1);
             //Точка конца верхней части концевого элемента окружности с началом координат в точке (0, 0)
             var secondPointTopEndPiece1 = 
                 _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointTopEndPiece1,
@@ -98,7 +93,7 @@ namespace InventorApi
 
             //Строим нижнюю линию концевого элемента окружности с началом координат в точке (0, 0)
             var xCoordSecondPointBottomEndPiece1 =
-                FindPointXCircleCenteredOrigin(radius, -(endPieceWidth / 2));
+                FindPointXCircleCenteredOrigin(radius, -(endPieceWidth / 2), -1);
             //Точка конца верхней части концевого элемента окружности с началом координат в точке (0, 0)
             var secondPointBottomEndPiece1 =
                 _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointBottomEndPiece1,
@@ -109,12 +104,15 @@ namespace InventorApi
                 _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointBottomEndPiece1 - endPieceLength,
                     -(endPieceWidth / 2));
 
-            //Строим верхнюю линию концевого элемента
+            //Строим нижнюю линию концевого элемента
             _connector.DrawLine(firstPointBottomEndPiece1, secondPointBottomEndPiece1);
+
+            //Соединяем линии концевых элементов
+            _connector.DrawLine(firstPointTopEndPiece1, firstPointBottomEndPiece1);
 
             //Строим верхнюю линию концевого элемента второй окружности
             var xCoordSecondPointTopEndPiece2 =
-                FindPointXCircle(xCoordCenter, endPieceWidth / 2, radius);
+                FindPointXCircle(xCoordCenter, endPieceWidth / 2, radius, 1);
 
             //Точка начала верхней части концевого элемента второй окружности
             var firstPointTopEndPiece2 =
@@ -131,7 +129,7 @@ namespace InventorApi
 
             //Строим нижнюю линию концевого элемента второй окружности
             var xCoordSecondPointBottomEndPiece2 =
-                FindPointXCircle(xCoordCenter, -(endPieceWidth / 2), radius);
+                FindPointXCircle(xCoordCenter, -(endPieceWidth / 2), radius, 1);
 
             //Точка начала верхней части концевого элемента второй окружности
             var firstPointBottomEndPiece2 =
@@ -143,8 +141,11 @@ namespace InventorApi
                 _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointBottomEndPiece2 + endPieceLength,
                     -(endPieceWidth / 2));
 
-            //Строим верхнюю линию концевого элемента
+            //Строим нижнюю линию концевого элемента
             _connector.DrawLine(firstPointBottomEndPiece2, secondPointBottomEndPiece2);
+
+            //Соединяем линии концевых элементов
+            _connector.DrawLine(secondPointTopEndPiece2, secondPointBottomEndPiece2);
         }
 
         /// <summary>
@@ -153,9 +154,9 @@ namespace InventorApi
         /// <param name="radius">Радиус окружности.</param>
         /// <param name="y">Коррдината у.</param>
         /// <returns>х координата точки на окружности с центром в начале координат.</returns>
-        private double FindPointXCircleCenteredOrigin(double radius, double y)
+        private double FindPointXCircleCenteredOrigin(double radius, double y, int sing)
         {
-            return (Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(y, 2)));
+            return sing * Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(y, 2));
         }
 
         /// <summary>
@@ -165,9 +166,9 @@ namespace InventorApi
         /// <param name="y">Коррдината у.</param>
         /// <param name="radius">Радиус окружности.</param>
         /// <returns>х0 координата точки центра окружности.</returns>
-        private double FindPointX0Circle(double x, double y, double radius)
+        private double FindPointX0Circle(double x, double y, double radius, int sign)
         {
-            return (x - (Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(y, 2))));
+            return x + sign * Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(y, 2));
         }
 
         /// <summary>
@@ -177,19 +178,119 @@ namespace InventorApi
         /// <param name="y">Коррдината у.</param>
         /// <param name="radius">Радиус окружности.</param>
         /// <returns>х координата точки центра окружности.</returns>
-        private double FindPointXCircle(double x0, double y, double radius)
+        private double FindPointXCircle(double x0, double y, double radius, int sign)
         {
-            return (x0 + (Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(y, 2))));
+            return x0 + sign * Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(y, 2));
         }
 
         private void BuildEndElement()
         {
-           
+            //Строим концевой элемент
+            var endPieceWidth = 3;
+
+            //Строим верхнюю линию концевого элемента окружности с началом координат в точке (0, 0)
+            var xCoordSecondPointTopEndPiece1 =
+                FindPointXCircleCenteredOrigin(radius, endPieceWidth / 2, -1);
+            //Точка конца верхней части концевого элемента окружности с началом координат в точке (0, 0)
+            var secondPointTopEndPiece1 =
+                _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointTopEndPiece1,
+                    endPieceWidth / 2);
+
+            //Точка начала верхней части концевого элемента окружности с началом координат в точке (0, 0)
+            var firstPointTopEndPiece1 =
+                _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointTopEndPiece1 - endPieceLength,
+                    endPieceWidth / 2);
+
+            //Строим верхнюю линию концевого элемента
+            _connector.DrawLine(firstPointTopEndPiece1, secondPointTopEndPiece1);
+
+            //Строим нижнюю линию концевого элемента окружности с началом координат в точке (0, 0)
+            var xCoordSecondPointBottomEndPiece1 =
+                FindPointXCircleCenteredOrigin(radius, -(endPieceWidth / 2), -1);
+            //Точка конца верхней части концевого элемента окружности с началом координат в точке (0, 0)
+            var secondPointBottomEndPiece1 =
+                _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointBottomEndPiece1,
+                    -(endPieceWidth / 2));
+
+            //Точка начала верхней части концевого элемента окружности с началом координат в точке (0, 0)
+            var firstPointBottomEndPiece1 =
+                _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointBottomEndPiece1 - endPieceLength,
+                    -(endPieceWidth / 2));
+
+            //Строим нижнюю линию концевого элемента
+            _connector.DrawLine(firstPointBottomEndPiece1, secondPointBottomEndPiece1);
+
+            //Соединяем линии концевых элементов
+            _connector.DrawLine(firstPointTopEndPiece1, firstPointBottomEndPiece1);
+
+            //Строим верхнюю линию концевого элемента второй окружности
+            var xCoordSecondPointTopEndPiece2 =
+                FindPointXCircle(xCoordCenter, endPieceWidth / 2, radius, 1);
+
+            //Точка начала верхней части концевого элемента второй окружности
+            var firstPointTopEndPiece2 =
+                _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointTopEndPiece2,
+                    endPieceWidth / 2);
+
+            //Точка конца верхней части концевого элемента второй окружности
+            var secondPointTopEndPiece2 =
+                _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointTopEndPiece2 + endPieceLength,
+                    endPieceWidth / 2);
+
+            //Строим верхнюю линию концевого элемента
+            _connector.DrawLine(firstPointTopEndPiece2, secondPointTopEndPiece2);
+
+            //Строим нижнюю линию концевого элемента второй окружности
+            var xCoordSecondPointBottomEndPiece2 =
+                FindPointXCircle(xCoordCenter, -(endPieceWidth / 2), radius, 1);
+
+            //Точка начала верхней части концевого элемента второй окружности
+            var firstPointBottomEndPiece2 =
+                _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointBottomEndPiece2,
+                    -(endPieceWidth / 2));
+
+            //Точка конца верхней части концевого элемента второй окружности
+            var secondPointBottomEndPiece2 =
+                _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointBottomEndPiece2 + endPieceLength,
+                    -(endPieceWidth / 2));
+
+            //Строим нижнюю линию концевого элемента
+            _connector.DrawLine(firstPointBottomEndPiece2, secondPointBottomEndPiece2);
+
+            //Соединяем линии концевых элементов
+            _connector.DrawLine(secondPointTopEndPiece2, secondPointBottomEndPiece2);
         }
 
         private void BuildBridge()
         {
+            var xCoordFirstPointTopBridge =
+                FindPointXCircleCenteredOrigin(radius, heightLowerPartBridge + bridgeWidth, 1);
+            //Точка начала верхней части моста
+            var firstPointTopBridge =
+                _connector.TransientGeometry.CreatePoint2d(xCoordFirstPointTopBridge,
+                    heightLowerPartBridge + bridgeWidth);
 
+            //Точка конца верхней части  моста
+            var secondPointBeginninBridge =
+                _connector.TransientGeometry.CreatePoint2d(xCoordFirstPointTopBridge + bridgeLength,
+                    heightLowerPartBridge + bridgeWidth);
+
+            //Точка начала нижней части моста
+            var firstPointBottomBridge =
+                _connector.TransientGeometry.CreatePoint2d(xCoordFirstPointBottomBridge,
+                    heightLowerPartBridge);
+
+            var xCoordSecondPointBottomBridge =
+                FindPointXCircle(xCoordCenter, firstPointBottomBridge.Y, radius, -1);
+            //Точка конца нижней части моста
+            var secondPointBottomBridge =
+                _connector.TransientGeometry.CreatePoint2d(xCoordSecondPointBottomBridge,
+                    heightLowerPartBridge);
+
+            //Строим верхнюю линию моста
+            _connector.DrawLine(firstPointTopBridge, secondPointBeginninBridge);
+            //Строим нижнюю линию моста
+            _connector.DrawLine(firstPointBottomBridge, secondPointBottomBridge);
         }
     }
 }

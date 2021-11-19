@@ -61,6 +61,7 @@ namespace InventorApi
 			var mainPlane = PartDefinition.WorkPlanes[planeNumber];
 			var offsetPlane = PartDefinition.WorkPlanes.AddByPlaneAndOffset(mainPlane, offset);
 			var sketch = PartDefinition.Sketches.Add(offsetPlane);
+			offsetPlane.Visible = false;
 			return sketch;
 		}
 

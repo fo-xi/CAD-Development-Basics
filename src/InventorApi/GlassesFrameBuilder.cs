@@ -10,7 +10,7 @@ namespace InventorApi
 {
     public class GlassesFrameBuilder
     {
-        private const double BridgeWidth = 4;
+        private const double BridgeWidth = 2;
 
         private const double HeightLowerPartBridge = 2;
 
@@ -25,11 +25,12 @@ namespace InventorApi
             _connector.CreateNewDocument();
             _connector.Sketch = _connector.MakeNewSketch(0);
             double outerCircleRadius = 56 / 2;
-            BuildFirstLensFrame(outerCircleRadius, (50 / 2));
+            BuildFirstLensFrame(outerCircleRadius, 50 / 2);
             BuildTopLineBridge(outerCircleRadius, 12);
-            BuildSecondLensFrame(outerCircleRadius, (50 / 2));
+            BuildSecondLensFrame(outerCircleRadius, 50 / 2);
             BuildEndElement(outerCircleRadius, 10);
             _connector.Extrude(3);
+            _connector.Fillet();
         }
 
         private void BuildFirstLensFrame(double outerCircleRadius, double innerCircleRadius)

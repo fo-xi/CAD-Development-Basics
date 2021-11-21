@@ -50,6 +50,7 @@ namespace GlassesFrameViewModel
 
         public MainWindowVM(IMessageBoxService messageBoxService)
         {
+            _messageBoxService = messageBoxService;
             ApplyCommand = new RelayCommand(Apply);
         }
 

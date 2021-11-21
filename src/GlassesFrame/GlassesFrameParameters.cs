@@ -28,7 +28,6 @@ namespace GlassesFrame
             set
             {
                 _bridgeLength = value;
-                RaisePropertyChanged(nameof(BridgeLength));
             }
         }
 
@@ -41,7 +40,6 @@ namespace GlassesFrame
             set
             {
                 _endPieceLength = value;
-                RaisePropertyChanged(nameof(EndPieceLength));
             }
         }
 
@@ -54,7 +52,6 @@ namespace GlassesFrame
             set
             {
                 _frameWigth = value;
-                RaisePropertyChanged(nameof(FrameWigth));
             }
         }
 
@@ -67,7 +64,6 @@ namespace GlassesFrame
             set
             {
                 _lensFrameWidth = value;
-                RaisePropertyChanged(nameof(LensFrameWidth));
             }
         }
 
@@ -80,7 +76,6 @@ namespace GlassesFrame
             set
             {
                 _lensWidth = value;
-                RaisePropertyChanged(nameof(LensWidth));
             }
         }
     }

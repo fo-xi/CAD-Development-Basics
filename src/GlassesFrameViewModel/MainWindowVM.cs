@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,9 +23,6 @@ namespace GlassesFrameViewModel
 
         private IMessageBoxService _messageBoxService;
 
-        protected readonly Dictionary<string, List<string>> _errorsByPropertyName
-            = new Dictionary<string, List<string>>();
-
         private Dictionary<Parameters, Action<double>> _parameters;
 
         private string _bridgeLength;
@@ -37,6 +35,17 @@ namespace GlassesFrameViewModel
 
         private string _lensWidth;
 
+        protected readonly Dictionary<string, List<string>> _errorsByPropertyName
+            = new Dictionary<string, List<string>>();
+
+        public string Errors
+        {
+            get
+            {
+                return AllErrors();
+            }
+        }
+
         public string BridgeLength
         {
             get
@@ -48,6 +57,7 @@ namespace GlassesFrameViewModel
                 Validate(value, Parameters.BridgeLength);
                 _bridgeLength = value;
                 RaisePropertyChanged(nameof(BridgeLength));
+                RaisePropertyChanged(nameof(Errors));
             }
         }
 
@@ -62,6 +72,7 @@ namespace GlassesFrameViewModel
                 Validate(value, Parameters.EndPieceLength);
                 _endPieceLength = value;
                 RaisePropertyChanged(nameof(EndPieceLength));
+                RaisePropertyChanged(nameof(Errors));
             }
         }
 
@@ -76,6 +87,7 @@ namespace GlassesFrameViewModel
                 Validate(value, Parameters.FrameWigth);
                 _frameWigth = value;
                 RaisePropertyChanged(nameof(FrameWigth));
+                RaisePropertyChanged(nameof(Errors));
             }
         }
 
@@ -90,6 +102,7 @@ namespace GlassesFrameViewModel
                 Validate(value, Parameters.LensFrameWidth);
                 _lensFrameWidth = value;
                 RaisePropertyChanged(nameof(LensFrameWidth));
+                RaisePropertyChanged(nameof(Errors));
             }
         }
 
@@ -104,6 +117,7 @@ namespace GlassesFrameViewModel
                 Validate(value, Parameters.LensWidth);
                 _lensWidth = value;
                 RaisePropertyChanged(nameof(LensWidth));
+                RaisePropertyChanged(nameof(Errors));
             }
         }
 
@@ -148,12 +162,24 @@ namespace GlassesFrameViewModel
                 { Parameters.LensWidth, value => _glassesFrameParameters.LensWidth = value }
             };
 
+            BridgeLength = _glassesFrameParameters.BridgeLength.ToString();
+            EndPieceLength = _glassesFrameParameters.EndPieceLength.ToString();
+            FrameWigth = _glassesFrameParameters.FrameWigth.ToString();
+            LensFrameWidth = _glassesFrameParameters.LensFrameWidth.ToString();
+            LensWidth = _glassesFrameParameters.LensWidth.ToString();
+
             ApplyCommand = new RelayCommand(Apply);
         }
 
         private void Apply()
         {
             _glassesFrameBuilder.Build(_glassesFrameParameters);
+
+            if (HasErrors)
+            {
+                _messageBoxService.Show
+                    ("Не получается построить модель. Посмотрите ошибки!");
+            }
         }
 
         private bool IsNumber(string value, out double result, Parameters parameter)
@@ -190,6 +216,22 @@ namespace GlassesFrameViewModel
             {
                 AddError(parameter.ToString(), e.Message);
             }
+        }
+
+        public string AllErrors()
+        {
+            string errors = string.Empty;
+
+            for (int i = 0; i < _errorsByPropertyName.Keys.Count; i++)
+            {
+                var value = _errorsByPropertyName.Values.ToArray()[i];
+                foreach (var error in value)
+                {
+                    errors += $"{error}\n";
+                }
+            }
+
+            return errors;
         }
 
         /// <summary>

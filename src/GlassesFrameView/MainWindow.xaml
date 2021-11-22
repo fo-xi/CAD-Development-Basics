@@ -48,7 +48,7 @@
 						Name="BridgeLength" 
 						Grid.Column="1"
 						Style="{StaticResource TextBoxStyle}"
-						Text ="{Binding GlassesFrameParameters.BridgeLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						Text ="{Binding BridgeLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 					<TextBlock 
 						Grid.Column="2"
@@ -74,7 +74,7 @@
 						Name="LensWidth" 
 						Grid.Column="1"
 						Style="{StaticResource TextBoxStyle}"
-						Text ="{Binding GlassesFrameParameters.LensWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						Text ="{Binding LensWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 					<TextBlock 
 						Grid.Column="2"
@@ -100,7 +100,7 @@
 						Name="LensFrameWidth" 
 						Grid.Column="1"
 						Style="{StaticResource TextBoxStyle}"
-						Text ="{Binding GlassesFrameParameters.LensFrameWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						Text ="{Binding LensFrameWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 					<TextBlock 
 						Grid.Column="2"
@@ -126,7 +126,7 @@
 						Name="FrameWidth" 
 						Grid.Column="1"
 						Style="{StaticResource TextBoxStyle}"
-						Text ="{Binding GlassesFrameParameters.FrameWigth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						Text ="{Binding FrameWigth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 					<TextBlock 
 						Grid.Column="2"
@@ -152,7 +152,7 @@
 						Name="EndPieceLength" 
 						Grid.Column="1"
 						Style="{StaticResource TextBoxStyle}"
-						Text ="{Binding GlassesFrameParameters.EndPieceLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						Text ="{Binding EndPieceLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 					<TextBlock 
 						Grid.Column="2"
@@ -177,10 +177,8 @@
 			Height="40">
 			<TextBlock
 				Background ="#eaa"
-				Padding="2">
-				<Run>Длина моста не входит в диспазон от 10мм до 16мм</Run>
-				<LineBreak/>
-				<Run>Можно вводить только числовые значения</Run>
+				Padding="2"
+				Text="{Binding Errors}">
 			</TextBlock>
 		</Grid>
 	</Grid>

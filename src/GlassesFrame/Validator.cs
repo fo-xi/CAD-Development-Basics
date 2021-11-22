@@ -9,23 +9,22 @@ namespace GlassesFrame
     public static class Validator
     {
         public static void AssertValue(double value, double min, double max,
-            string fieldName, out string message)
+            string fieldName)
         {
-            message = String.Empty;
 
             if ((value < min) || (value > max))
             {
-                message = fieldName + " не входит в диапазон от " + min + " до " + max;
+                throw new ArgumentException(fieldName + " не входит в диапазон от " + 
+                                            min + " до " + max);
             }
         }
 
-        public static void IsLensWidth(double lensWidth, double lensFrameWidth, out string message)
+        public static void IsLensWidth(double lensWidth, double lensFrameWidth)
         {
-            message = String.Empty;
-
             if ((lensWidth > lensFrameWidth))
             {
-                message = "Ширина линзы должна быть меньше ширины рамы линзы";
+                throw new ArgumentException
+                    ("Ширина линзы должна быть меньше ширины рамы линзы");
             }
         }
     }

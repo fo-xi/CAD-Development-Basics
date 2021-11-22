@@ -27,6 +27,7 @@ namespace GlassesFrame
             }
             set
             {
+                Validator.AssertValue(value, 10, 16, "Длина моста");
                 _bridgeLength = value;
             }
         }
@@ -39,6 +40,8 @@ namespace GlassesFrame
             }
             set
             {
+                Validator.AssertValue(value, 4, 8,
+                    "Длина концевого элемента");
                 _endPieceLength = value;
             }
         }
@@ -51,6 +54,7 @@ namespace GlassesFrame
             }
             set
             {
+                Validator.AssertValue(value, 2, 5, "Ширина оправы");
                 _frameWigth = value;
             }
         }
@@ -63,6 +67,8 @@ namespace GlassesFrame
             }
             set
             {
+                Validator.AssertValue(value, 52, 58, "Ширина рамы линзы");
+                Validator.IsLensWidth(LensWidth, value);
                 _lensFrameWidth = value;
             }
         }
@@ -75,8 +81,19 @@ namespace GlassesFrame
             }
             set
             {
+                Validator.AssertValue(value, 52, 58, "Ширина линзы");
+                Validator.IsLensWidth(value, LensFrameWidth);
                 _lensWidth = value;
             }
+        }
+
+        public GlassesFrameParameters()
+        {
+            BridgeLength = 12;
+            EndPieceLength = 6;
+            FrameWigth = 3;
+            LensFrameWidth = 56;
+            LensWidth = 52;
         }
     }
 }

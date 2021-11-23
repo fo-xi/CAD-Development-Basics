@@ -25,6 +25,8 @@ namespace GlassesFrameViewModel
 
         private Dictionary<Parameters, Action<double>> _parameters;
 
+        private Dictionary<Parameters, string> _parametersName;
+
         private string _bridgeLength;
 
         private string _endPieceLength;
@@ -162,6 +164,15 @@ namespace GlassesFrameViewModel
                 { Parameters.LensWidth, value => _glassesFrameParameters.LensWidth = value }
             };
 
+            _parametersName = new Dictionary<Parameters, string>
+            {
+                { Parameters.BridgeLength, "Длина моста" },
+                { Parameters.EndPieceLength, "Длина концевого элемента" },
+                { Parameters.FrameWigth, "Ширина оправы" },
+                { Parameters.LensFrameWidth, "Ширина рамы линзы" },
+                { Parameters.LensWidth, "Ширина линзы" }
+            };
+
             BridgeLength = _glassesFrameParameters.BridgeLength.ToString();
             EndPieceLength = _glassesFrameParameters.EndPieceLength.ToString();
             FrameWigth = _glassesFrameParameters.FrameWigth.ToString();
@@ -173,30 +184,26 @@ namespace GlassesFrameViewModel
 
         private void Apply()
         {
-            _glassesFrameBuilder.Build(_glassesFrameParameters);
-
             if (HasErrors)
             {
                 _messageBoxService.Show
                     ("Не получается построить модель. Посмотрите ошибки!");
             }
+            else 
+            {
+                _glassesFrameBuilder.Build(_glassesFrameParameters);
+            }
         }
 
         private bool IsNumber(string value, out double result, Parameters parameter)
         {
-            var propertyName = parameter.ToString();
-
-            if (string.IsNullOrEmpty(value))
-            {
-                AddError(propertyName, "Строки не должны быть пустыми!");
-            }
-
             if (double.TryParse(value, out result))
             {
                 return true;
             }
 
-            AddError(propertyName, "Можно вводить только числовые значения!");
+            AddError(parameter.ToString(), 
+                $"{_parametersName[parameter]}: можно вводить только числовые значения!");
             return false;
         }
 
@@ -204,6 +211,13 @@ namespace GlassesFrameViewModel
         {
             if (!IsNumber(value, out double result, parameter))
             {
+                return;
+            } 
+
+            if (string.IsNullOrEmpty(value))
+            {
+                AddError(parameter.ToString(),
+                    $"{_parametersName[parameter]}: cтрока не должна быть пустой!");
                 return;
             }
 
@@ -230,7 +244,6 @@ namespace GlassesFrameViewModel
                     errors += $"{error}\n";
                 }
             }
-
             return errors;
         }
 

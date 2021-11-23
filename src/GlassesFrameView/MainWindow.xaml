@@ -6,7 +6,7 @@
 		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 		xmlns:local="clr-namespace:GlassesFrameView"
 		mc:Ignorable="d"
-		Title="Оправа для очков" Height="290" Width="340">
+		Title="Оправа для очков" Height="Auto" Width="800" SizeToContent="Height">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
@@ -14,8 +14,14 @@
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
 		<GroupBox 
 			Grid.Row="0"
+			Grid.Column="0"
 			Margin="5"
 			Header="Введите параметры">
 
@@ -28,7 +34,7 @@
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
-
+				
 				<Grid 
 					Grid.Row="0"
 					Margin="5">
@@ -41,7 +47,7 @@
 
 					<TextBlock 
 						Grid.Column="0"
-						Text="Длина моста" 
+						Text="Длина моста (A)" 
 						HorizontalAlignment="Left"/>
 
 					<TextBox 
@@ -67,7 +73,7 @@
 
 					<TextBlock 
 						Grid.Column="0"
-						Text="Ширина линзы" 
+						Text="Ширина линзы (B)" 
 						HorizontalAlignment="Left"/>
 
 					<TextBox
@@ -93,7 +99,7 @@
 
 					<TextBlock 
 						Grid.Column="0"
-						Text="Ширина рамы линзы" 
+						Text="Ширина рамы линзы (C)" 
 						HorizontalAlignment="Left"/>
 
 					<TextBox 
@@ -145,7 +151,7 @@
 
 					<TextBlock 
 						Grid.Column="0"
-						Text="Длина концевого элемента" 
+						Text="Длина концевого элемента (D)" 
 						HorizontalAlignment="Left"/>
 
 					<TextBox 
@@ -163,6 +169,7 @@
 
 		<Grid
 			Grid.Row="1"
+			Grid.Column="0"
 			Margin="5 0 5 5">
 			<Button 
 				Margin="1"
@@ -174,12 +181,23 @@
 
 		<Grid
 			Grid.Row="2"
-			Height="40">
+			Grid.ColumnSpan="2">
 			<TextBlock
 				Background ="#eaa"
 				Padding="2"
 				Text="{Binding Errors}">
 			</TextBlock>
+		</Grid>
+
+		<Grid
+			Grid.RowSpan="2"
+			Grid.Column="1"
+			VerticalAlignment="Center">
+			<Image>
+				<Image.Source>
+					<FormatConvertedBitmap Source="../Resources/GlassesFrame.jpg" />
+				</Image.Source>
+			</Image>
 		</Grid>
 	</Grid>
 </Window>

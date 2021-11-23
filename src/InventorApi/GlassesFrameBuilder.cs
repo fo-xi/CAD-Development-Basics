@@ -24,11 +24,11 @@ namespace InventorApi
         {
             _connector.CreateNewDocument();
             _connector.Sketch = _connector.MakeNewSketch(0);
-            double outerCircleRadius = 56 / 2;
-            BuildFirstLensFrame(outerCircleRadius, 50 / 2);
-            BuildTopLineBridge(outerCircleRadius, 12);
-            BuildSecondLensFrame(outerCircleRadius, 50 / 2);
-            BuildEndElement(outerCircleRadius, 10);
+            double outerCircleRadius = parameters.LensFrameWidth / 2;
+            BuildFirstLensFrame(outerCircleRadius, parameters.LensWidth / 2);
+            BuildeBridge(outerCircleRadius, parameters.BridgeLength);
+            BuildSecondLensFrame(outerCircleRadius, parameters.LensWidth / 2);
+            BuildEndElement(outerCircleRadius, parameters.EndPieceLength);
             _connector.Extrude(3);
             _connector.Fillet();
         }
@@ -59,7 +59,7 @@ namespace InventorApi
             _connector.DrawCircle(_centerPoint, innerCircleRadius);
         }
 
-        private void BuildTopLineBridge(double radius, double bridgeLength)
+        private void BuildeBridge(double radius, double bridgeLength)
         {
             var xCoordFirstPointTopBridge =
                 FindPointXCircleCenteredOrigin(radius, HeightLowerPartBridge + BridgeWidth, 1);

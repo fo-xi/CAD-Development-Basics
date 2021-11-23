@@ -8,18 +8,40 @@ using Inventor;
 
 namespace InventorApi
 {
+    /// <summary>
+    /// Класс, отвечающий за создание оправы для очков.
+    /// </summary>
     public class GlassesFrameBuilder
     {
+        /// <summary>
+        /// Высота моста.
+        /// </summary>
         private const double BridgeWidth = 2;
 
+        /// <summary>
+        /// Расстояние между центром и нижней частью моста.
+        /// </summary>
         private const double HeightLowerPartBridge = 2;
 
+        /// <summary>
+        /// Объект, содержащий в себе методы Inventor API.
+        /// </summary>
         private InventorConnector _connector = new InventorConnector();
 
+        /// <summary>
+        /// Вторая точка верхней части моста.
+        /// </summary>
         private Point2d _secondPointBeginninBridge;
 
+        /// <summary>
+        /// x координата центра окружности второй линзы.
+        /// </summary>
         private double _xCoordCenter;
 
+        /// <summary>
+        /// Создает оправу для очков.
+        /// </summary>
+        /// <param name="parameters">Параметры оправы для очков.</param>
         public void Build(GlassesFrameParameters parameters)
         {
             _connector.CreateNewDocument();
@@ -33,6 +55,11 @@ namespace InventorApi
             _connector.Fillet();
         }
 
+        /// <summary>
+        /// Строит раму первой линзы.
+        /// </summary>
+        /// <param name="outerCircleRadius">Радус внешней окружности.</param>
+        /// <param name="innerCircleRadius">Радус внутренней окружности.</param>
         private void BuildFirstLensFrame(double outerCircleRadius, double innerCircleRadius)
         {
             var _centerPoint = _connector.TransientGeometry.CreatePoint2d(0, 0);
@@ -44,6 +71,11 @@ namespace InventorApi
             _connector.DrawCircle(_centerPoint, innerCircleRadius);
         }
 
+        /// <summary>
+        /// Строит раму второй линзы.
+        /// </summary>
+        /// <param name="outerCircleRadius">Радус внешней окружности.</param>
+        /// <param name="innerCircleRadius">Радус внутренней окружности.</param>
         private void BuildSecondLensFrame(double outerCircleRadius, double innerCircleRadius)
         {
             //Строим внешнюю окружность
@@ -59,6 +91,11 @@ namespace InventorApi
             _connector.DrawCircle(_centerPoint, innerCircleRadius);
         }
 
+        /// <summary>
+        /// Строит мост.
+        /// </summary>
+        /// <param name="radius">Радиус внешней окружности.</param>
+        /// <param name="bridgeLength">Длина моста.</param>
         private void BuildeBridge(double radius, double bridgeLength)
         {
             var xCoordFirstPointTopBridge =
@@ -81,6 +118,11 @@ namespace InventorApi
             _connector.DrawRectangle(firstPointTopBridge, secondPointBottomBridge);
         }
 
+        /// <summary>
+        /// Строит концевые элементы.
+        /// </summary>
+        /// <param name="radius">Радиус внешней окружности.</param>
+        /// <param name="endPieceLength">Длина концевых элементов.</param>
         private void BuildEndElement(double radius, double endPieceLength)
         {
             //Строим концевой элемент

@@ -10,22 +10,42 @@ using Application = Inventor.Application;
 
 namespace InventorApi
 {
+	/// <summary>
+	/// Класс, обеспечивающий взаимодействие с необходимыми методами Inventor API.
+	/// </summary>
 	public class InventorConnector
 	{
+		/// <summary>
+		/// Возвращает и задает приложение Inventor.
+		/// </summary>
 		public Application InventorApplication { get; set; }
 
+		/// <summary>
+		/// Возвращает и задает документ в приложении.
+		/// </summary>
 		public PartDocument PartDocument { get; set; }
 
+		/// <summary>
+		/// Возвращает и задает описание документа.
+		/// </summary>
 		public PartComponentDefinition PartDefinition { get; set; }
 
+		/// <summary>
+		/// Возвращает и задает геометрию приложения.
+		/// </summary>
 		public TransientGeometry TransientGeometry { get; set; }
 
+		/// <summary>
+		/// Возвращает и задает скетч.
+		/// </summary>
 		public PlanarSketch Sketch { get; set; }
 
+		/// <summary>
+		/// Создание нового документа.
+		/// </summary>
 		public void CreateNewDocument()
 		{
-			InventorApplication = null;
-
+			//Инициализация Inventor
 			try
 			{
 				InventorApplication = (Application)Marshal.GetActiveObject("Inventor.Application");
@@ -45,6 +65,7 @@ namespace InventorApi
 				}
 			}
 
+			//Инициализация документа сборки
 			PartDocument = (PartDocument)InventorApplication.Documents.Add
 			(DocumentTypeEnum.kPartDocumentObject,
 				InventorApplication.FileManager.GetTemplateFile
@@ -55,16 +76,28 @@ namespace InventorApi
 			TransientGeometry = InventorApplication.TransientGeometry;
 		}
 
+		/// <summary>
+		/// Создает скетч.
+		/// </summary>
+		/// <param name="offset">Номер плоскости: 1 - ZY, 2 - ZX, 3 - XY.</param>
+		/// <returns>Скетч.</returns>
 		public PlanarSketch MakeNewSketch(double offset)
 		{
 			int planeNumber = 3;
+			//Получаем ссылку на рабочую плоскость.
 			var mainPlane = PartDefinition.WorkPlanes[planeNumber];
 			var offsetPlane = PartDefinition.WorkPlanes.AddByPlaneAndOffset(mainPlane, offset);
+			//Создаем на плоскости скетч.
 			var sketch = PartDefinition.Sketches.Add(offsetPlane);
 			offsetPlane.Visible = false;
 			return sketch;
 		}
 
+		/// <summary>
+		/// Рисует круг.
+		/// </summary>
+		/// <param name="centerPoint">Центральная точка.</param>
+		/// <param name="radius">Радиус окружности.</param>
 		public void DrawCircle(Point2d centerPoint, double radius)
 		{
 			var mmCenterPoint = TransientGeometry.CreatePoint2d(centerPoint.X / 10.0,
@@ -73,6 +106,11 @@ namespace InventorApi
 			Sketch.SketchCircles.AddByCenterRadius(mmCenterPoint, radius);
 		}
 
+		/// <summary>
+		/// Рисует линию.
+		/// </summary>
+		/// <param name="startPoint">Точка начала линиии.</param>
+		/// <param name="endPoint">Точка конца линии.</param>
 		public void DrawLine(Point2d startPoint, Point2d endPoint)
 		{
 			var mmStartPoint = TransientGeometry.CreatePoint2d(startPoint.X / 10.0,
@@ -82,6 +120,11 @@ namespace InventorApi
 			Sketch.SketchLines.AddByTwoPoints(mmStartPoint, mmEndPoint);
 		}
 
+		/// <summary>
+		/// Рисует прямоугольник.
+		/// </summary>
+		/// <param name="pointOne">Первая точка.</param>
+		/// <param name="pointTwo">Вторая точка.</param>
 		public void DrawRectangle(Point2d pointOne, Point2d pointTwo)
 		{
 			var mmPointOne = TransientGeometry.CreatePoint2d(pointOne.X / 10.0,
@@ -91,6 +134,10 @@ namespace InventorApi
 			Sketch.SketchLines.AddAsTwoPointRectangle(mmPointOne, mmPointTwo);
 		}
 
+		/// <summary>
+		/// Выдавливание.
+		/// </summary>
+		/// <param name="distance">Расстояние.</param>
 		public void Extrude(double distance)
 		{
 			var sketchProfile = Sketch.Profiles.AddForSolid();
@@ -100,6 +147,9 @@ namespace InventorApi
 			PartDefinition.Features.ExtrudeFeatures.Add(extrudeDef);
 		}
 
+		/// <summary>
+		/// Сопряжение.
+		/// </summary>
 		public void Fillet()
 		{
 			EdgeCollection edgeTopBridge = InventorApplication.TransientObjects.CreateEdgeCollection();

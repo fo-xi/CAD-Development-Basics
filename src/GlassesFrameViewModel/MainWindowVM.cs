@@ -15,31 +15,70 @@ using InventorApi;
 
 namespace GlassesFrameViewModel
 {
+	/// <summary>
+	/// Класс, связывающий модель и представление.
+	/// </summary>
 	public class MainWindowVM : ViewModelBase, INotifyDataErrorInfo
 	{
+		/// <summary>
+		/// Объект, хранящий в себе параметры оправы для очков.
+		/// </summary>
 		private GlassesFrameParameters _glassesFrameParameters = new GlassesFrameParameters();
 
+		/// <summary>
+		/// Объект, хранящий в себе методы создания оправы для очков.
+		/// </summary>
 		private GlassesFrameBuilder _glassesFrameBuilder = new GlassesFrameBuilder();
 
+		/// <summary>
+		/// Интерфейс окна сообщения.
+		/// </summary>
 		private IMessageBoxService _messageBoxService;
 
+		/// <summary>
+		/// Соотносит свойство и метод присвоения значения.
+		/// </summary>
 		private Dictionary<Parameters, Action<double>> _parameters;
 
+		/// <summary>
+		/// Соотносит название свойства со свойством.
+		/// </summary>
 		private Dictionary<Parameters, string> _parametersName;
 
+		/// <summary>
+		/// Длина моста.
+		/// </summary>
 		private string _bridgeLength;
 
+		/// <summary>
+		/// Длина концевого элемента.
+		/// </summary>
 		private string _endPieceLength;
 
+		/// <summary>
+		/// Ширина оправы.
+		/// </summary>
 		private string _frameWigth;
 
+		/// <summary>
+		/// Ширина рамы линзы.
+		/// </summary>
 		private string _lensFrameWidth;
 
+		/// <summary>
+		/// Ширина линзы.
+		/// </summary>
 		private string _lensWidth;
 
+		/// <summary>
+		/// Содержит ошибки свойства.
+		/// </summary>
 		protected readonly Dictionary<string, List<string>> _errorsByPropertyName
 			= new Dictionary<string, List<string>>();
 
+		/// <summary>
+		/// Получает ошибки всех свойств.
+		/// </summary>
 		public string Errors
 		{
 			get
@@ -48,6 +87,9 @@ namespace GlassesFrameViewModel
 			}
 		}
 
+		/// <summary>
+		/// Возвращает и задает длину моста.
+		/// </summary>
 		public string BridgeLength
 		{
 			get
@@ -63,6 +105,9 @@ namespace GlassesFrameViewModel
 			}
 		}
 
+		/// <summary>
+		/// Вовзращает и задает длину концевого элемента.
+		/// </summary>
 		public string EndPieceLength
 		{
 			get
@@ -78,6 +123,9 @@ namespace GlassesFrameViewModel
 			}
 		}
 
+		/// <summary>
+		/// Возвращает и задает ширину оправы.
+		/// </summary>
 		public string FrameWigth
 		{
 			get
@@ -93,6 +141,9 @@ namespace GlassesFrameViewModel
 			}
 		}
 
+		/// <summary>
+		/// Возвращает и задает ширину рамы линзы.
+		/// </summary>
 		public string LensFrameWidth
 		{
 			get
@@ -108,6 +159,9 @@ namespace GlassesFrameViewModel
 			}
 		}
 
+		/// <summary>
+		/// Возвращает и задает ширину линзы.
+		/// </summary>
 		public string LensWidth
 		{
 			get
@@ -123,34 +177,15 @@ namespace GlassesFrameViewModel
 			}
 		}
 
-		public GlassesFrameParameters GlassesFrameParameters
-		{
-			get
-			{
-				return _glassesFrameParameters;
-			}
-			set
-			{
-				_glassesFrameParameters = value;
-				RaisePropertyChanged(nameof(GlassesFrameParameters));
-			}
-		}
-
-		public GlassesFrameBuilder GlassesFrameBuilder
-		{
-			get
-			{
-				return _glassesFrameBuilder;
-			}
-			set
-			{
-				_glassesFrameBuilder = value;
-				RaisePropertyChanged(nameof(GlassesFrameBuilder));
-			}
-		}
-
+		/// <summary>
+		/// Возвращает и задает команду создания оправы для очков.
+		/// </summary>
 		public RelayCommand ApplyCommand { get; set; }
 
+		/// <summary>
+		/// Конструктор.
+		/// </summary>
+		/// <param name="messageBoxService">Окно сообщений.</param>
 		public MainWindowVM(IMessageBoxService messageBoxService)
 		{
 			_messageBoxService = messageBoxService;
@@ -182,6 +217,9 @@ namespace GlassesFrameViewModel
 			ApplyCommand = new RelayCommand(Apply);
 		}
 
+		/// <summary>
+		/// Создание оправы для очков.
+		/// </summary>
 		private void Apply()
 		{
 			if (HasErrors)
@@ -195,6 +233,13 @@ namespace GlassesFrameViewModel
 			}
 		}
 
+		/// <summary>
+		/// Проверяет строку на число и на пустоту строки.
+		/// </summary>
+		/// <param name="value">Значение.</param>
+		/// <param name="result">Значение типа double.</param>
+		/// <param name="parameter">Параметры оправы для очков.</param>
+		/// <returns></returns>
 		private bool IsNumber(string value, out double result, Parameters parameter)
 		{
 			if (double.TryParse(value, out result))
@@ -219,19 +264,17 @@ namespace GlassesFrameViewModel
 			}
 		}
 
+		/// <summary>
+		/// Валидация свойств.
+		/// </summary>
+		/// <param name="value">Значение.</param>
+		/// <param name="parameter">Параметры оправы для очков.</param>
 		private void Validate(string value, Parameters parameter)
 		{
 			if (!IsNumber(value, out double result, parameter))
 			{
 				return;
 			} 
-
-			if (string.IsNullOrEmpty(value))
-			{
-				AddError(parameter.ToString(),
-					$"{_parametersName[parameter]}: cтрока не должна быть пустой!");
-				return;
-			}
 
 			try
 			{
@@ -244,6 +287,10 @@ namespace GlassesFrameViewModel
 			}
 		}
 
+		/// <summary>
+		/// Записывает все ошибки в строку.
+		/// </summary>
+		/// <returns>Строка.</returns>
 		public string AllErrors()
 		{
 			string errors = string.Empty;
@@ -260,9 +307,9 @@ namespace GlassesFrameViewModel
 		}
 
 		/// <summary>
-		/// Gets all error messages.
+		/// Получает все сообщения об ошибках свойства.
 		/// </summary>
-		/// <param name="propertyName">Property Name.</param>
+		/// <param name="propertyName">Название свойства.</param>
 		/// <returns></returns>
 		public IEnumerable GetErrors(string propertyName)
 		{
@@ -271,7 +318,7 @@ namespace GlassesFrameViewModel
 		}
 
 		/// <summary>
-		///  Property indicates whether there are any validation errors.
+		///  Показывает есть ли ошибки.
 		/// </summary>
 		public virtual bool HasErrors
 		{
@@ -282,25 +329,24 @@ namespace GlassesFrameViewModel
 		}
 
 		/// <summary>
-		/// Event must occur when the validation errors have changed
-		/// for a property or for the entity.
+		/// Событие, которое отреагирует при изменении списка ошибок.
 		/// </summary>
 		public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
 		/// <summary>
-		/// Event triggering.
+		/// Включает событие.
 		/// </summary>
-		/// <param name="propertyName"></param>
+		/// <param name="propertyName">Название свойства.</param>
 		public void OnErrorsChanged(string propertyName)
 		{
 			ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
 		}
 
 		/// <summary>
-		/// Adds an error message to the error dictionary.
+		/// Добаляет ошибку в словарь.
 		/// </summary>
-		/// <param name="propertyName">Property Name.</param>
-		/// <param name="error">Error message.</param>
+		/// <param name="propertyName">Название свойства.</param>
+		/// <param name="error">Сообщение ошибки.</param>
 		protected void AddError(string propertyName, string error)
 		{
 			if (!_errorsByPropertyName.ContainsKey(propertyName))
@@ -314,9 +360,9 @@ namespace GlassesFrameViewModel
 		}
 
 		/// <summary>
-		/// Removes all errors by key.
+		/// Удаляет ошибки по ключу.
 		/// </summary>
-		/// <param name="propertyName">Property Name.</param>
+		/// <param name="propertyName">Название свойства.</param>
 		protected void ClearErrors(string propertyName)
 		{
 			if (_errorsByPropertyName.ContainsKey(propertyName))

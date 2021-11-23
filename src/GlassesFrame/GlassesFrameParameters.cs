@@ -7,18 +7,39 @@ using GalaSoft.MvvmLight;
 
 namespace GlassesFrame
 {
+	/// <summary>
+	/// Класс параметров.
+	/// </summary>
 	public class GlassesFrameParameters : ViewModelBase
 	{
+		/// <summary>
+		/// Длина моста.
+		/// </summary>
 		private double _bridgeLength;
 
+		/// <summary>
+		/// Длина концевого элемента.
+		/// </summary>
 		private double _endPieceLength;
 
+		/// <summary>
+		/// Ширина оправы.
+		/// </summary>
 		private double _frameWigth;
 
+		/// <summary>
+		/// Ширина рамы линзы.
+		/// </summary>
 		private double _lensFrameWidth;
 
+		/// <summary>
+		/// Ширина линзы.
+		/// </summary>
 		private double _lensWidth;
 
+		/// <summary>
+		/// Возвращает и задает длину моста.
+		/// </summary>
 		public double BridgeLength
 		{
 			get
@@ -32,6 +53,9 @@ namespace GlassesFrame
 			}
 		}
 
+		/// <summary>
+		/// Вовзращает и задает длину концевого элемента.
+		/// </summary>
 		public double EndPieceLength
 		{
 			get
@@ -46,6 +70,9 @@ namespace GlassesFrame
 			}
 		}
 
+		/// <summary>
+		/// Возвращает и задает ширину оправы.
+		/// </summary>
 		public double FrameWigth
 		{
 			get
@@ -59,6 +86,9 @@ namespace GlassesFrame
 			}
 		}
 
+		/// <summary>
+		/// Возвращает и задает ширину рамы линзы.
+		/// </summary>
 		public double LensFrameWidth
 		{
 			get
@@ -73,6 +103,9 @@ namespace GlassesFrame
 			}
 		}
 
+		/// <summary>
+		/// Возвращает и задает ширину линзы.
+		/// </summary>
 		public double LensWidth
 		{
 			get
@@ -87,6 +120,9 @@ namespace GlassesFrame
 			}
 		}
 
+		/// <summary>
+		/// Задает параметры детали.
+		/// </summary>
 		public GlassesFrameParameters()
 		{
 			BridgeLength = 12;

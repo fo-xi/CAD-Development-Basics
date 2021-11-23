@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace GlassesFrame
 {
+    /// <summary>
+    /// Класс, отвечающий за валидацию полей.
+    /// </summary>
     public static class Validator
     {
+        /// <summary>
+        /// Проверяет принадлежность числа заданному промежутку.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <param name="min">Минимальное значение.</param>
+        /// <param name="max">Максимальное значение.</param>
+        /// <param name="fieldName">Название свойства.</param>
         public static void AssertValue(double value, double min, double max,
             string fieldName)
         {
@@ -19,6 +29,11 @@ namespace GlassesFrame
             }
         }
 
+        /// <summary>
+        /// Проверка зависимости ширина линзы от ширины рамы линзы.
+        /// </summary>
+        /// <param name="lensWidth">Ширина линзы.</param>
+        /// <param name="lensFrameWidth">Ширина рамы линзы.</param>
         public static void IsLensWidth(double lensWidth, double lensFrameWidth)
         {
             if ((lensWidth > lensFrameWidth))

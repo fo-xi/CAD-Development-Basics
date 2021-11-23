@@ -67,8 +67,8 @@ namespace GlassesFrame
 			}
 			set
 			{
-				Validator.IsLensWidth(LensWidth, value);
 				Validator.AssertValue(value, 52, 58, "Ширина рамы линзы");
+				Validator.IsLensWidth(LensWidth, value);
 				_lensFrameWidth = value;
 			}
 		}
@@ -81,8 +81,8 @@ namespace GlassesFrame
 			}
 			set
 			{
-				Validator.IsLensWidth(value, LensFrameWidth);
 				Validator.AssertValue(value, 48, 54, "Ширина линзы");
+				Validator.IsLensWidth(value, LensFrameWidth);
 				_lensWidth = value;
 			}
 		}
@@ -92,8 +92,8 @@ namespace GlassesFrame
 			BridgeLength = 12;
 			EndPieceLength = 6;
 			FrameWigth = 3;
-			LensFrameWidth = 52;
-			LensWidth = 50;
+			LensFrameWidth = 56;
+			LensWidth = 54;
 		}
 	}
 }

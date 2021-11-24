@@ -176,10 +176,11 @@ namespace InventorApi
         /// </summary>
         /// <param name="radius">Радиус окружности.</param>
         /// <param name="y">Коррдината у.</param>
+        /// <param name="sign">Знак.</param>
         /// <returns>х координата точки на окружности с центром в начале координат.</returns>
-        private double FindPointXCircleCenteredOrigin(double radius, double y, int sing)
+        private double FindPointXCircleCenteredOrigin(double radius, double y, int sign)
         {
-            return sing * Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(y, 2));
+            return sign * Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(y, 2));
         }
 
         /// <summary>
@@ -188,6 +189,7 @@ namespace InventorApi
         /// <param name="x">Коррдината x.</param>
         /// <param name="y">Коррдината у.</param>
         /// <param name="radius">Радиус окружности.</param>
+        /// <param name="sign">Знак.</param>
         /// <returns>х0 координата точки центра окружности.</returns>
         private double FindPointX0Circle(double x, double y, double radius, int sign)
         {
@@ -200,6 +202,7 @@ namespace InventorApi
         /// <param name="x0">Коррдината x.</param>
         /// <param name="y">Коррдината у.</param>
         /// <param name="radius">Радиус окружности.</param>
+        /// <param name="sign">Знак.</param>
         /// <returns>х координата точки центра окружности.</returns>
         private double FindPointXCircle(double x0, double y, double radius, int sign)
         {

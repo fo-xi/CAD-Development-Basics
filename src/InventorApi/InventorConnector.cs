@@ -108,7 +108,7 @@ namespace InventorApi
 		/// <summary>
 		/// Создает скетч.
 		/// </summary>
-		/// <param name="offset">Номер плоскости: 1 - ZY, 2 - ZX, 3 - XY.</param>
+		/// <param name="offset">Расстояние от плоскости.</param>
 		/// <returns>Скетч.</returns>
 		public PlanarSketch MakeNewSketch(double offset)
 		{
@@ -126,13 +126,13 @@ namespace InventorApi
 		/// Рисует круг.
 		/// </summary>
 		/// <param name="centerPoint">Центральная точка.</param>
-		/// <param name="radius">Радиус окружности.</param>
-		public void DrawCircle(Point2d centerPoint, double radius)
+		/// <param name="mmRadius">Радиус окружности.</param>
+		public void DrawCircle(Point2d centerPoint, double mmRadius)
 		{
 			var mmCenterPoint = TransientGeometry.CreatePoint2d
                 (GetCM(centerPoint.X), GetCM(centerPoint.Y));
-			radius /= Unit;
-			Sketch.SketchCircles.AddByCenterRadius(mmCenterPoint, radius);
+			mmRadius /= Unit;
+			Sketch.SketchCircles.AddByCenterRadius(mmCenterPoint, mmRadius);
 		}
 
 		/// <summary>
@@ -143,9 +143,9 @@ namespace InventorApi
 		public void DrawRectangle(Point2d pointOne, Point2d pointTwo)
 		{
 			var mmPointOne = TransientGeometry.CreatePoint2d(GetCM(pointOne.X),
+                GetCM(pointOne.Y));
+			var mmPointTwo = TransientGeometry.CreatePoint2d(GetCM(pointTwo.X),
                 GetCM(pointTwo.Y));
-			var mmPointTwo = TransientGeometry.CreatePoint2d(GetCM(pointOne.X),
-                GetCM(pointTwo.X));
 			Sketch.SketchLines.AddAsTwoPointRectangle(mmPointOne, mmPointTwo);
 		}
 
@@ -173,6 +173,31 @@ namespace InventorApi
 			PartDefinition.Features.ExtrudeFeatures.Add(extrudeDef);
 		}
 
+		/// <summary>
+		/// Создание множества сопряжений.
+		/// </summary>
+		public void Fillets()
+		{
+			//TODO: Убрать дублирование (+)
+			//TODO: RSDN (+)
+            var fillets = new List<FilletDefinition>
+            {
+                //Сопряжение верхней части моста
+                CreateFillet(6, 3, 3, RadiusTopBridge),
+                //Сопряжение нижней части моста
+                CreateFillet(7, 4, 3, RadiusBottomBridge),
+                //Сопряжение верхних частей концевых элементов
+                CreateFillet(6, 3, 1, RadiusTopEndPieces),
+                //Сопряжение нижних частей концевых элементов
+                CreateFillet(7, 4, 1, RadiusBottomEndPieces)
+            };
+
+            foreach (var fillet in fillets)
+            {
+				PartDocument.ComponentDefinition.Features.FilletFeatures.Add(fillet);
+			}
+        }
+
         /// <summary>
         /// Сопряжение.
         /// </summary>
@@ -196,26 +221,5 @@ namespace InventorApi
             filletDefinitionTopBridge.AddConstantRadiusEdgeSet(edgeTopBridge, radius);
             return filletDefinitionTopBridge;
         }
-
-		/// <summary>
-		/// Создание множества сопряжений.
-		/// </summary>
-		public void Fillets()
-		{
-			//TODO: Убрать дублирование (+)
-			//TODO: RSDN (+)
-			//Сопряжение верхней части моста
-			PartDocument.ComponentDefinition.Features.FilletFeatures
-			    .Add(CreateFillet(6, 3, 3, RadiusTopBridge));
-			//Сопряжение нижней части моста
-			PartDocument.ComponentDefinition.Features.FilletFeatures
-			    .Add(CreateFillet(7, 4, 3, RadiusBottomBridge));
-			//Сопряжение верхних частей концевых элементов
-			PartDocument.ComponentDefinition.Features.FilletFeatures
-                .Add(CreateFillet(6, 3, 1, RadiusTopEndPieces));
-            //Сопряжение нижних частей концевых элементов
-			PartDocument.ComponentDefinition.Features.FilletFeatures
-			    .Add(CreateFillet(7, 4, 1, RadiusBottomEndPieces));
-		}
-    }
+	}
 }

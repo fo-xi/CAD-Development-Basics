@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Inventor;
 using Application = Inventor.Application;
@@ -14,16 +11,16 @@ namespace InventorApi
 	/// Класс, обеспечивающий взаимодействие с необходимыми методами Inventor API.
 	/// </summary>
 	public class InventorConnector
-    {
+	{
 		/// <summary>
 		/// Значение для перевода в сантиметры.
 		/// </summary>
-        private const double Unit = 10.0;
+		private const double Unit = 10.0;
 
-        /// <summary>
+		/// <summary>
 		/// Радиус для построения сопряжения верхней части моста.
 		/// </summary>
-        private const double RadiusTopBridge = 0.15;
+		private const double RadiusTopBridge = 0.15;
 
 		/// <summary>
 		/// Радиус для построения сопряжения нижней части моста.
@@ -40,7 +37,7 @@ namespace InventorApi
 		/// </summary>
 		private const double RadiusBottomEndPieces = 0.3;
 
-        /// <summary>
+		/// <summary>
 		/// Возвращает и задает приложение Inventor.
 		/// </summary>
 		public Application InventorApplication { get; set; }
@@ -74,18 +71,18 @@ namespace InventorApi
 			try
 			{
 				InventorApplication = 
-                    (Application)Marshal.GetActiveObject("Inventor.Application");
+					(Application)Marshal.GetActiveObject("Inventor.Application");
 			}
 			catch (Exception)
 			{
 				try
 				{
-					//TODO: RSDN (+)
 					//Если приложение не открыто, то пытаемся его открыть
+					//TODO: RSDN (+)
 					Type inventorApplicationType = Type.GetTypeFromProgID("Inventor.Application");
 
 					InventorApplication = 
-                        (Application)Activator.CreateInstance(inventorApplicationType);
+						(Application)Activator.CreateInstance(inventorApplicationType);
 					InventorApplication.Visible = true;
 				}
 				catch (Exception)
@@ -130,7 +127,7 @@ namespace InventorApi
 		public void DrawCircle(Point2d centerPoint, double mmRadius)
 		{
 			var mmCenterPoint = TransientGeometry.CreatePoint2d
-                (GetCM(centerPoint.X), GetCM(centerPoint.Y));
+				(GetCM(centerPoint.X), GetCM(centerPoint.Y));
 			mmRadius /= Unit;
 			Sketch.SketchCircles.AddByCenterRadius(mmCenterPoint, mmRadius);
 		}
@@ -143,23 +140,23 @@ namespace InventorApi
 		public void DrawRectangle(Point2d pointOne, Point2d pointTwo)
 		{
 			var mmPointOne = TransientGeometry.CreatePoint2d(GetCM(pointOne.X),
-                GetCM(pointOne.Y));
+				GetCM(pointOne.Y));
 			var mmPointTwo = TransientGeometry.CreatePoint2d(GetCM(pointTwo.X),
-                GetCM(pointTwo.Y));
+				GetCM(pointTwo.Y));
 			Sketch.SketchLines.AddAsTwoPointRectangle(mmPointOne, mmPointTwo);
 		}
 
-        /// <summary>
+		/// <summary>
 		/// Перевод в сантиметры.
 		/// </summary>
 		/// <param name="value">Значение.</param>
 		/// <returns>Значение в сантиметрах.</returns>
-        private double GetCM(double value)
-        {
-            return value / Unit;
-        }
+		private double GetCM(double value)
+		{
+			return value / Unit;
+		}
 
-        /// <summary>
+		/// <summary>
 		/// Выдавливание.
 		/// </summary>
 		/// <param name="distance">Расстояние.</param>
@@ -167,9 +164,9 @@ namespace InventorApi
 		{
 			var sketchProfile = Sketch.Profiles.AddForSolid();
 			var extrudeDef = PartDefinition.Features.ExtrudeFeatures
-                .CreateExtrudeDefinition(sketchProfile, PartFeatureOperationEnum.kJoinOperation);
+				.CreateExtrudeDefinition(sketchProfile, PartFeatureOperationEnum.kJoinOperation);
 			extrudeDef.SetDistanceExtent(GetCM(distance),
-                PartFeatureExtentDirectionEnum.kPositiveExtentDirection);
+				PartFeatureExtentDirectionEnum.kPositiveExtentDirection);
 			PartDefinition.Features.ExtrudeFeatures.Add(extrudeDef);
 		}
 
@@ -180,46 +177,46 @@ namespace InventorApi
 		{
 			//TODO: Убрать дублирование (+)
 			//TODO: RSDN (+)
-            var fillets = new List<FilletDefinition>
-            {
-                //Сопряжение верхней части моста
-                CreateFillet(6, 3, 3, RadiusTopBridge),
-                //Сопряжение нижней части моста
-                CreateFillet(7, 4, 3, RadiusBottomBridge),
-                //Сопряжение верхних частей концевых элементов
-                CreateFillet(6, 3, 1, RadiusTopEndPieces),
-                //Сопряжение нижних частей концевых элементов
-                CreateFillet(7, 4, 1, RadiusBottomEndPieces)
-            };
+			var fillets = new List<FilletDefinition>
+			{
+				//Сопряжение верхней части моста
+				CreateFillet(6, 3, 3, RadiusTopBridge),
+				//Сопряжение нижней части моста
+				CreateFillet(7, 4, 3, RadiusBottomBridge),
+				//Сопряжение верхних частей концевых элементов
+				CreateFillet(6, 3, 1, RadiusTopEndPieces),
+				//Сопряжение нижних частей концевых элементов
+				CreateFillet(7, 4, 1, RadiusBottomEndPieces)
+			};
 
-            foreach (var fillet in fillets)
-            {
+			foreach (var fillet in fillets)
+			{
 				PartDocument.ComponentDefinition.Features.FilletFeatures.Add(fillet);
 			}
-        }
+		}
 
-        /// <summary>
-        /// Сопряжение.
-        /// </summary>
-        /// <param name="firstFaceIndex">Индекс первой грани.</param>
-        /// <param name="secondFaceIndex">Индекс второй грани.</param>
-        /// <param name="edgeIndex">Индекс края.</param>
-        /// <param name="radius">Радиус.</param>
-        /// <returns>Сопряжение.</returns>
-        private FilletDefinition CreateFillet(int firstFaceIndex, int secondFaceIndex,
-            int edgeIndex, double radius)
-        {
-            EdgeCollection edgeTopBridge = InventorApplication
-                .TransientObjects.CreateEdgeCollection();
-            edgeTopBridge.Add(PartDocument.ComponentDefinition
-                .Features.ExtrudeFeatures[1].Faces[firstFaceIndex].Edges[edgeIndex]);
-            edgeTopBridge.Add(PartDocument.ComponentDefinition
-                .Features.ExtrudeFeatures[1].Faces[secondFaceIndex].Edges[edgeIndex]);
+		/// <summary>
+		/// Сопряжение.
+		/// </summary>
+		/// <param name="firstFaceIndex">Индекс первой грани.</param>
+		/// <param name="secondFaceIndex">Индекс второй грани.</param>
+		/// <param name="edgeIndex">Индекс края.</param>
+		/// <param name="radius">Радиус.</param>
+		/// <returns>Сопряжение.</returns>
+		private FilletDefinition CreateFillet(int firstFaceIndex, int secondFaceIndex,
+			int edgeIndex, double radius)
+		{
+			EdgeCollection edgeTopBridge = InventorApplication
+				.TransientObjects.CreateEdgeCollection();
+			edgeTopBridge.Add(PartDocument.ComponentDefinition
+				.Features.ExtrudeFeatures[1].Faces[firstFaceIndex].Edges[edgeIndex]);
+			edgeTopBridge.Add(PartDocument.ComponentDefinition
+				.Features.ExtrudeFeatures[1].Faces[secondFaceIndex].Edges[edgeIndex]);
 
-            FilletDefinition filletDefinitionTopBridge = PartDocument
-                .ComponentDefinition.Features.FilletFeatures.CreateFilletDefinition();
-            filletDefinitionTopBridge.AddConstantRadiusEdgeSet(edgeTopBridge, radius);
-            return filletDefinitionTopBridge;
-        }
+			FilletDefinition filletDefinitionTopBridge = PartDocument
+				.ComponentDefinition.Features.FilletFeatures.CreateFilletDefinition();
+			filletDefinitionTopBridge.AddConstantRadiusEdgeSet(edgeTopBridge, radius);
+			return filletDefinitionTopBridge;
+		}
 	}
 }

@@ -1,12 +1,8 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GlassesFrame;
@@ -23,27 +19,27 @@ namespace GlassesFrameViewModel
 		/// <summary>
 		/// Объект, хранящий в себе параметры оправы для очков.
 		/// </summary>
-		private GlassesFrameParameters _glassesFrameParameters = new GlassesFrameParameters();
+		private readonly GlassesFrameParameters _glassesFrameParameters = new GlassesFrameParameters();
 
 		/// <summary>
 		/// Объект, хранящий в себе методы создания оправы для очков.
 		/// </summary>
-		private GlassesFrameBuilder _glassesFrameBuilder = new GlassesFrameBuilder();
+		private readonly GlassesFrameBuilder _glassesFrameBuilder = new GlassesFrameBuilder();
 
 		/// <summary>
 		/// Интерфейс окна сообщения.
 		/// </summary>
-		private IMessageBoxService _messageBoxService;
+		private readonly IMessageBoxService _messageBoxService;
 
 		/// <summary>
 		/// Соотносит свойство и метод присвоения значения.
 		/// </summary>
-		private Dictionary<Parameters, Action<double>> _parameters;
+		private readonly Dictionary<Parameters, Action<double>> _parameters;
 
 		/// <summary>
 		/// Соотносит название свойства со свойством.
 		/// </summary>
-		private Dictionary<Parameters, string> _parametersName;
+		private readonly Dictionary<Parameters, string> _parametersName;
 
 		/// <summary>
 		/// Длина моста.
@@ -81,10 +77,7 @@ namespace GlassesFrameViewModel
 		/// </summary>
 		public string Errors
 		{
-			get
-			{
-				return AllErrors();
-			}
+			get => AllErrors();
 		}
 
 		/// <summary>
@@ -92,10 +85,7 @@ namespace GlassesFrameViewModel
 		/// </summary>
 		public string BridgeLength
 		{
-			get
-			{
-				return _bridgeLength;
-			}
+			get => _bridgeLength;
 			set
 			{
 				Validate(value, Parameters.BridgeLength);
@@ -110,10 +100,7 @@ namespace GlassesFrameViewModel
 		/// </summary>
 		public string EndPieceLength
 		{
-			get
-			{
-				return _endPieceLength;
-			}
+			get => _endPieceLength;
 			set
 			{
 				Validate(value, Parameters.EndPieceLength);
@@ -128,10 +115,7 @@ namespace GlassesFrameViewModel
 		/// </summary>
 		public string FrameWigth
 		{
-			get
-			{
-				return _frameWigth;
-			}
+			get => _frameWigth;
 			set
 			{
 				Validate(value, Parameters.FrameWidth);
@@ -146,10 +130,7 @@ namespace GlassesFrameViewModel
 		/// </summary>
 		public string LensFrameWidth
 		{
-			get
-			{
-				return _lensFrameWidth;
-			}
+			get => _lensFrameWidth;
 			set
 			{
 				Validate(value, Parameters.LensFrameWidth);
@@ -164,10 +145,7 @@ namespace GlassesFrameViewModel
 		/// </summary>
 		public string LensWidth
 		{
-			get
-			{
-				return _lensWidth;
-			}
+			get => _lensWidth;
 			set
 			{
 				Validate(value, Parameters.LensWidth);
@@ -192,11 +170,16 @@ namespace GlassesFrameViewModel
 
 			_parameters = new Dictionary<Parameters, Action<double>>
 			{
-				{ Parameters.BridgeLength, value => _glassesFrameParameters.BridgeLength = value },
-				{ Parameters.EndPieceLength, value => _glassesFrameParameters.EndPieceLength = value },
-				{ Parameters.FrameWidth, value => _glassesFrameParameters.FrameWigth = value },
-				{ Parameters.LensFrameWidth, value => _glassesFrameParameters.LensFrameWidth = value },
-				{ Parameters.LensWidth, value => _glassesFrameParameters.LensWidth = value }
+				{ Parameters.BridgeLength, value => 
+				_glassesFrameParameters.BridgeLength = value },
+				{ Parameters.EndPieceLength, value => 
+				_glassesFrameParameters.EndPieceLength = value },
+				{ Parameters.FrameWidth, value => 
+				_glassesFrameParameters.FrameWigth = value },
+				{ Parameters.LensFrameWidth, value => 
+				_glassesFrameParameters.LensFrameWidth = value },
+				{ Parameters.LensWidth, value => 
+				_glassesFrameParameters.LensWidth = value }
 			};
 
 			_parametersName = new Dictionary<Parameters, string>

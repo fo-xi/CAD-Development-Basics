@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 
 namespace GlassesFrame
 {
@@ -55,10 +50,7 @@ namespace GlassesFrame
 		/// </summary>
 		public double EndPieceLength
 		{
-			get
-			{
-				return _endPieceLength;
-			}
+			get => _endPieceLength;
 			set
 			{
 				Validator.AssertValue(value, 4, 8,
@@ -72,10 +64,7 @@ namespace GlassesFrame
 		/// </summary>
 		public double FrameWigth
 		{
-			get
-			{
-				return _frameWigth;
-			}
+			get => _frameWigth;
 			set
 			{
 				Validator.AssertValue(value, 2, 5, "Ширина оправы");
@@ -88,10 +77,7 @@ namespace GlassesFrame
 		/// </summary>
 		public double LensFrameWidth
 		{
-			get
-			{
-				return _lensFrameWidth;
-			}
+			get => _lensFrameWidth;
 			set
 			{
 				Validator.AssertValue(value, 52, 58, "Ширина рамы линзы");
@@ -105,10 +91,7 @@ namespace GlassesFrame
 		/// </summary>
 		public double LensWidth
 		{
-			get
-			{
-				return _lensWidth;
-			}
+			get => _lensWidth;
 			set
 			{
 				Validator.AssertValue(value, 48, 54, "Ширина линзы");

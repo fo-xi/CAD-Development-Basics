@@ -58,14 +58,14 @@ namespace InventorApi
         /// <param name="innerCircleRadius">Радус внутренней окружности.</param>
         private void BuildFirstLensFrame(double outerCircleRadius, double innerCircleRadius)
         {
-            var _centerPoint = 
+            var centerPoint = 
                 _connector.TransientGeometry.CreatePoint2d(0, 0);
 
             //Строим внешнюю окружность 
-            _connector.DrawCircle(_centerPoint, outerCircleRadius);
+            _connector.DrawCircle(centerPoint, outerCircleRadius);
 
             //Строим внутреннюю окружность
-            _connector.DrawCircle(_centerPoint, innerCircleRadius);
+            _connector.DrawCircle(centerPoint, innerCircleRadius);
         }
 
         /// <summary>
@@ -79,15 +79,15 @@ namespace InventorApi
             _xCoordCenter =
                 FindPointX0Circle(_secondPointBeginninBridge.X,
                     _secondPointBeginninBridge.Y, outerCircleRadius, 1);
-            //TODO: RSDN
-            var _centerPoint =
+            //TODO: RSDN (+)
+            var centerPoint =
                 _connector.TransientGeometry.CreatePoint2d(_xCoordCenter, 0);
 
             //Строим внешнюю окружность
-            _connector.DrawCircle(_centerPoint, outerCircleRadius);
+            _connector.DrawCircle(centerPoint, outerCircleRadius);
 
             //Строим внутреннюю окружность
-            _connector.DrawCircle(_centerPoint, innerCircleRadius);
+            _connector.DrawCircle(centerPoint, innerCircleRadius);
         }
 
         /// <summary>

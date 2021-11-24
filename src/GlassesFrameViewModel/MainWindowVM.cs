@@ -156,7 +156,7 @@ namespace GlassesFrameViewModel
 				_lensFrameWidth = value;
 				RaisePropertyChanged(nameof(LensFrameWidth));
 				RaisePropertyChanged(nameof(Errors));
-			}
+            }
 		}
 
 		/// <summary>
@@ -172,9 +172,9 @@ namespace GlassesFrameViewModel
 			{
 				Validate(value, Parameters.LensWidth);
 				_lensWidth = value;
-				RaisePropertyChanged(nameof(LensWidth));
+                RaisePropertyChanged(nameof(LensWidth));
 				RaisePropertyChanged(nameof(Errors));
-			}
+            }
 		}
 
 		/// <summary>
@@ -274,12 +274,18 @@ namespace GlassesFrameViewModel
 			if (!IsNumber(value, out double result, parameter))
 			{
 				return;
-			} 
+			}
 
 			try
 			{
-				ClearErrors(parameter.ToString());
-				_parameters[parameter](result);
+                if (parameter == Parameters.LensFrameWidth || parameter == Parameters.LensWidth)
+                {
+                    ClearErrors(Parameters.LensFrameWidth.ToString());
+                    ClearErrors(Parameters.LensWidth.ToString());
+                }
+
+                ClearErrors(parameter.ToString());
+                _parameters[parameter](result);
 			}
 			catch (ArgumentException e)
 			{

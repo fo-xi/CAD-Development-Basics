@@ -116,7 +116,7 @@ namespace GlassesFrame
 			{
 				Validator.AssertValue(value, 48, 54, "Ширина линзы");
 				Validator.IsLensWidth(value, LensFrameWidth);
-				_lensWidth = value;
+                _lensWidth = value;
 			}
 		}
 

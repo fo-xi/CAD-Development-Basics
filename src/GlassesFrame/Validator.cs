@@ -36,7 +36,7 @@ namespace GlassesFrame
         /// <param name="lensFrameWidth">Ширина рамы линзы.</param>
         public static void IsLensWidth(double lensWidth, double lensFrameWidth)
         {
-            if ((lensWidth > lensFrameWidth))
+            if (lensWidth > lensFrameWidth)
             {
                 throw new ArgumentException
                     ("Ширина линзы должна быть меньше ширины рамы линзы");

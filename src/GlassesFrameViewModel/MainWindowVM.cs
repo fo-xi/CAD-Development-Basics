@@ -134,7 +134,7 @@ namespace GlassesFrameViewModel
 			}
 			set
 			{
-				Validate(value, Parameters.FrameWigth);
+				Validate(value, Parameters.FrameWidth);
 				_frameWigth = value;
 				RaisePropertyChanged(nameof(FrameWigth));
 				RaisePropertyChanged(nameof(Errors));
@@ -194,7 +194,7 @@ namespace GlassesFrameViewModel
 			{
 				{ Parameters.BridgeLength, value => _glassesFrameParameters.BridgeLength = value },
 				{ Parameters.EndPieceLength, value => _glassesFrameParameters.EndPieceLength = value },
-				{ Parameters.FrameWigth, value => _glassesFrameParameters.FrameWigth = value },
+				{ Parameters.FrameWidth, value => _glassesFrameParameters.FrameWigth = value },
 				{ Parameters.LensFrameWidth, value => _glassesFrameParameters.LensFrameWidth = value },
 				{ Parameters.LensWidth, value => _glassesFrameParameters.LensWidth = value }
 			};
@@ -203,7 +203,7 @@ namespace GlassesFrameViewModel
 			{
 				{ Parameters.BridgeLength, "Длина моста" },
 				{ Parameters.EndPieceLength, "Длина концевого элемента" },
-				{ Parameters.FrameWigth, "Ширина оправы" },
+				{ Parameters.FrameWidth, "Ширина оправы" },
 				{ Parameters.LensFrameWidth, "Ширина рамы линзы" },
 				{ Parameters.LensWidth, "Ширина линзы" }
 			};

@@ -22,7 +22,7 @@ namespace GlassesFrameView
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainWindowVM _mainWindow = new MainWindowVM(new MessageBoxService());
+        private MainWindowVM _mainWindow = new MainWindowVM(new MessageBoxService());
 
         public MainWindow()
         {

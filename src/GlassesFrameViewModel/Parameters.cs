@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace GlassesFrameViewModel
 {
-    /// <summary>
-    /// Параметры оправы для очков.
-    /// </summary>
-    enum Parameters
-    {
-        BridgeLength,
-        EndPieceLength,
-        FrameWigth,
-        LensFrameWidth,
-        LensWidth
-    }
+     /// <summary>
+     /// Параметры оправы для очков.
+     /// </summary>
+     public enum Parameters
+     {
+          BridgeLength,
+          EndPieceLength,
+          FrameWidth,
+          LensFrameWidth,
+          LensWidth
+     }
 }

@@ -54,6 +54,7 @@ namespace InventorApi
 			{
 				try
 				{
+					//TODO: RSDN
 					Type _inventorApplicationType = Type.GetTypeFromProgID("Inventor.Application");
 
 					InventorApplication = (Application)Activator.CreateInstance(_inventorApplicationType);
@@ -152,9 +153,15 @@ namespace InventorApi
 		/// </summary>
 		public void Fillet()
 		{
+			//TODO: Убрать дублирование
+            //TODO: RSDN
 			EdgeCollection edgeTopBridge = InventorApplication.TransientObjects.CreateEdgeCollection();
 			edgeTopBridge.Add(PartDocument.ComponentDefinition.Features.ExtrudeFeatures[1].Faces[6].Edges[3]);
 			edgeTopBridge.Add(PartDocument.ComponentDefinition.Features.ExtrudeFeatures[1].Faces[3].Edges[3]);
+
+            FilletDefinition filletDefinitionTopBridge = PartDocument.ComponentDefinition.Features.FilletFeatures.CreateFilletDefinition();
+            filletDefinitionTopBridge.AddConstantRadiusEdgeSet(edgeTopBridge, 0.15);
+            PartDocument.ComponentDefinition.Features.FilletFeatures.Add(filletDefinitionTopBridge);
 
 			EdgeCollection edgeBottomBridge = InventorApplication.TransientObjects.CreateEdgeCollection();
 			edgeBottomBridge.Add(PartDocument.ComponentDefinition.Features.ExtrudeFeatures[1].Faces[7].Edges[3]);
@@ -169,8 +176,7 @@ namespace InventorApi
 			edgeBottomEndPiece.Add(PartDocument.ComponentDefinition.Features.ExtrudeFeatures[1].Faces[7].Edges[1]);
 			edgeBottomEndPiece.Add(PartDocument.ComponentDefinition.Features.ExtrudeFeatures[1].Faces[4].Edges[1]);
 
-			FilletDefinition filletDefinitionTopBridge = PartDocument.ComponentDefinition.Features.FilletFeatures.CreateFilletDefinition();
-			filletDefinitionTopBridge.AddConstantRadiusEdgeSet(edgeTopBridge, 0.15);
+			
 
 			FilletDefinition filletDefinitionBottomBridge = PartDocument.ComponentDefinition.Features.FilletFeatures.CreateFilletDefinition();
 			filletDefinitionBottomBridge.AddConstantRadiusEdgeSet(edgeBottomBridge, 0.4);
@@ -181,7 +187,6 @@ namespace InventorApi
 			FilletDefinition filletDefinitionBottomEndPiece = PartDocument.ComponentDefinition.Features.FilletFeatures.CreateFilletDefinition();
 			filletDefinitionBottomEndPiece.AddConstantRadiusEdgeSet(edgeBottomEndPiece, 0.3);
 
-			PartDocument.ComponentDefinition.Features.FilletFeatures.Add(filletDefinitionTopBridge);
 			PartDocument.ComponentDefinition.Features.FilletFeatures.Add(filletDefinitionBottomBridge);
 			PartDocument.ComponentDefinition.Features.FilletFeatures.Add(filletDefinitionTopEndPiece);
 			PartDocument.ComponentDefinition.Features.FilletFeatures.Add(filletDefinitionBottomEndPiece);

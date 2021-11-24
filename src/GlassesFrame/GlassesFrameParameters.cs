@@ -42,11 +42,8 @@ namespace GlassesFrame
 		/// </summary>
 		public double BridgeLength
 		{
-			get
-			{
-				return _bridgeLength;
-			}
-			set
+			get => _bridgeLength;
+            set
 			{
 				Validator.AssertValue(value, 10, 16, "Длина моста");
 				_bridgeLength = value;

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GlassesFrame;
 using Inventor;
 
@@ -81,6 +77,7 @@ namespace InventorApi
             //Строим внешнюю окружность
             _xCoordCenter =
                 FindPointX0Circle(_secondPointBeginninBridge.X, _secondPointBeginninBridge.Y, outerCircleRadius, 1);
+            //TODO: RSDN
             var _centerPoint =
                 _connector.TransientGeometry.CreatePoint2d(_xCoordCenter, 0);
 

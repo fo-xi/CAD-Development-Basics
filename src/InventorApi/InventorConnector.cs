@@ -105,7 +105,7 @@ namespace InventorApi
 		/// <summary>
 		/// Создает скетч.
 		/// </summary>
-		/// <param name="offset">Расстояние от плоскости.</param>
+		/// <param name="offset">Смещение плоскости.</param>
 		/// <returns>Скетч.</returns>
 		public PlanarSketch MakeNewSketch(double offset)
 		{
@@ -206,17 +206,17 @@ namespace InventorApi
 		private FilletDefinition CreateFillet(int firstFaceIndex, int secondFaceIndex,
 			int edgeIndex, double radius)
 		{
-			EdgeCollection edgeTopBridge = InventorApplication
+			EdgeCollection edges = InventorApplication
 				.TransientObjects.CreateEdgeCollection();
-			edgeTopBridge.Add(PartDocument.ComponentDefinition
+			edges.Add(PartDocument.ComponentDefinition
 				.Features.ExtrudeFeatures[1].Faces[firstFaceIndex].Edges[edgeIndex]);
-			edgeTopBridge.Add(PartDocument.ComponentDefinition
+			edges.Add(PartDocument.ComponentDefinition
 				.Features.ExtrudeFeatures[1].Faces[secondFaceIndex].Edges[edgeIndex]);
 
-			FilletDefinition filletDefinitionTopBridge = PartDocument
+			FilletDefinition filletDefinition = PartDocument
 				.ComponentDefinition.Features.FilletFeatures.CreateFilletDefinition();
-			filletDefinitionTopBridge.AddConstantRadiusEdgeSet(edgeTopBridge, radius);
-			return filletDefinitionTopBridge;
+			filletDefinition.AddConstantRadiusEdgeSet(edges, radius);
+			return filletDefinition;
 		}
 	}
 }

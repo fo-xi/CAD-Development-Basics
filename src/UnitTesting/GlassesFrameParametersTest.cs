@@ -51,7 +51,7 @@ namespace UnitTesting
         [TestCase(TestName = "Позитивный тест геттера EndPieceLength")]
         public void TestEndPieceLengthGet_CorrectValue()
         {
-            var expected = 6;
+            var expected = 8;
             var parameters = new GlassesFrameParameters()
             {
                 EndPieceLength = expected
@@ -64,7 +64,7 @@ namespace UnitTesting
         [TestCase(TestName = "Позитивный тест сеттера EndPieceLength")]
         public void TestEndPieceLengthSet_CorrectValue()
         {
-            var expected = 6;
+            var expected = 8;
             var parameters = new GlassesFrameParameters();
             Assert.DoesNotThrow(() =>
             {
@@ -73,12 +73,12 @@ namespace UnitTesting
                "значение длины концевых элементов");
         }
 
-        [TestCase(2, "Исключение возникнет, " +
-                     "если значение не входит в диапазон [4, 8]",
-            TestName = "Присвоение значения 2 в качестве значения длины концевых элементов")]
-        [TestCase(10,
-            "Исключение возникнет, если значение не входит в диапазон [4, 8]",
-            TestName = "Присвоение значения 10 в качестве значения длины концевых элементов")]
+        [TestCase(1, "Исключение возникнет, " +
+                     "если значение не входит в диапазон [6, 12]",
+            TestName = "Присвоение значения 1 в качестве значения длины концевых элементов")]
+        [TestCase(100,
+            "Исключение возникнет, если значение не входит в диапазон [6, 12]",
+            TestName = "Присвоение значения 100 в качестве значения длины концевых элементов")]
         public void TestEndPieceLength_InvalidEndPieceLength(double wrongEndPieceLength,
             string message)
         {

@@ -289,7 +289,7 @@ namespace GlassesFrameViewModel
 				var value = _errorsByPropertyName.Values.ToArray()[i];
 				foreach (var error in value)
 				{
-					errors += $"{error}\n";
+					errors += $"\n{error}";
 				}
 			}
 			return errors;

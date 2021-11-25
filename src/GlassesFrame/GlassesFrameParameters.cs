@@ -53,7 +53,7 @@ namespace GlassesFrame
 			get => _endPieceLength;
 			set
 			{
-				Validator.AssertValue(value, 4, 8,
+				Validator.AssertValue(value, 6, 12,
 					"Длина концевого элемента");
 				_endPieceLength = value;
 			}
@@ -106,7 +106,7 @@ namespace GlassesFrame
 		public GlassesFrameParameters()
 		{
 			BridgeLength = 12;
-			EndPieceLength = 6;
+			EndPieceLength = 8;
 			FrameWidth = 3;
 			LensFrameWidth = 56;
 			LensWidth = 54;

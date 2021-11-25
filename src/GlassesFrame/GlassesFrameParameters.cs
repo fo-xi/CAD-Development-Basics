@@ -20,7 +20,7 @@ namespace GlassesFrame
 		/// <summary>
 		/// Ширина оправы.
 		/// </summary>
-		private double _frameWigth;
+		private double _frameWidth;
 
 		/// <summary>
 		/// Ширина рамы линзы.
@@ -62,13 +62,13 @@ namespace GlassesFrame
 		/// <summary>
 		/// Возвращает и задает ширину оправы.
 		/// </summary>
-		public double FrameWigth
+		public double FrameWidth
 		{
-			get => _frameWigth;
+			get => _frameWidth;
 			set
 			{
 				Validator.AssertValue(value, 2, 5, "Ширина оправы");
-				_frameWigth = value;
+				_frameWidth = value;
 			}
 		}
 
@@ -107,7 +107,7 @@ namespace GlassesFrame
 		{
 			BridgeLength = 12;
 			EndPieceLength = 6;
-			FrameWigth = 3;
+			FrameWidth = 3;
 			LensFrameWidth = 56;
 			LensWidth = 54;
 		}

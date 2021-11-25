@@ -47,7 +47,7 @@ namespace InventorApi
             BuildeBridge(outerCircleRadius, parameters.BridgeLength);
             BuildSecondLensFrame(outerCircleRadius, parameters.LensWidth / 2);
             BuildEndElement(outerCircleRadius, parameters.EndPieceLength);
-            _connector.Extrude(parameters.FrameWigth);
+            _connector.Extrude(parameters.FrameWidth);
             _connector.Fillets();
         }
 

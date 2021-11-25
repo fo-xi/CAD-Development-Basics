@@ -54,7 +54,7 @@ namespace GlassesFrameViewModel
 		/// <summary>
 		/// Ширина оправы.
 		/// </summary>
-		private string _frameWigth;
+		private string _frameWidth;
 
 		/// <summary>
 		/// Ширина рамы линзы.
@@ -96,7 +96,7 @@ namespace GlassesFrameViewModel
 		}
 
 		/// <summary>
-		/// Вовзращает и задает длину концевого элемента.
+		/// Возвращает и задает длину концевого элемента.
 		/// </summary>
 		public string EndPieceLength
 		{
@@ -115,11 +115,11 @@ namespace GlassesFrameViewModel
 		/// </summary>
 		public string FrameWigth
 		{
-			get => _frameWigth;
+			get => _frameWidth;
 			set
 			{
 				Validate(value, Parameters.FrameWidth);
-				_frameWigth = value;
+				_frameWidth = value;
 				RaisePropertyChanged(nameof(FrameWigth));
 				RaisePropertyChanged(nameof(Errors));
 			}
@@ -175,7 +175,7 @@ namespace GlassesFrameViewModel
 				{ Parameters.EndPieceLength, value => 
 				_glassesFrameParameters.EndPieceLength = value },
 				{ Parameters.FrameWidth, value => 
-				_glassesFrameParameters.FrameWigth = value },
+				_glassesFrameParameters.FrameWidth = value },
 				{ Parameters.LensFrameWidth, value => 
 				_glassesFrameParameters.LensFrameWidth = value },
 				{ Parameters.LensWidth, value => 
@@ -193,7 +193,7 @@ namespace GlassesFrameViewModel
 
 			BridgeLength = _glassesFrameParameters.BridgeLength.ToString();
 			EndPieceLength = _glassesFrameParameters.EndPieceLength.ToString();
-			FrameWigth = _glassesFrameParameters.FrameWigth.ToString();
+			FrameWigth = _glassesFrameParameters.FrameWidth.ToString();
 			LensFrameWidth = _glassesFrameParameters.LensFrameWidth.ToString();
 			LensWidth = _glassesFrameParameters.LensWidth.ToString();
 
@@ -235,7 +235,7 @@ namespace GlassesFrameViewModel
 				if (string.IsNullOrEmpty(value))
 				{
 					AddError(parameter.ToString(),
-						$"{_parametersName[parameter]}: cтрока не должна быть пустой!");
+						$"{_parametersName[parameter]}: строка не должна быть пустой!");
 				}
 				else
 				{
@@ -282,7 +282,7 @@ namespace GlassesFrameViewModel
 		/// <returns>Строка.</returns>
 		public string AllErrors()
 		{
-			string errors = string.Empty;
+			var errors = string.Empty;
 
 			for (int i = 0; i < _errorsByPropertyName.Keys.Count; i++)
 			{
@@ -332,7 +332,7 @@ namespace GlassesFrameViewModel
 		}
 
 		/// <summary>
-		/// Добаляет ошибку в словарь.
+		/// Добавляет ошибку в словарь.
 		/// </summary>
 		/// <param name="propertyName">Название свойства.</param>
 		/// <param name="error">Сообщение ошибки.</param>

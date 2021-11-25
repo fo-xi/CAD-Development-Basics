@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlassesFrameViewModel", "Gl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventorApi", "InventorApi\InventorApi.csproj", "{B622A0B8-5F42-4756-9829-CCE276383A3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTesting", "UnitTesting\UnitTesting.csproj", "{843404ED-773A-429C-9F86-A3ABA0FE9614}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B622A0B8-5F42-4756-9829-CCE276383A3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B622A0B8-5F42-4756-9829-CCE276383A3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B622A0B8-5F42-4756-9829-CCE276383A3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{843404ED-773A-429C-9F86-A3ABA0FE9614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{843404ED-773A-429C-9F86-A3ABA0FE9614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{843404ED-773A-429C-9F86-A3ABA0FE9614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{843404ED-773A-429C-9F86-A3ABA0FE9614}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

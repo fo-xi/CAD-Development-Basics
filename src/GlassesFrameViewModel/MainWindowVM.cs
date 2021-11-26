@@ -113,14 +113,14 @@ namespace GlassesFrameViewModel
 		/// <summary>
 		/// Возвращает и задает ширину оправы.
 		/// </summary>
-		public string FrameWigth
+		public string FrameWidth
 		{
 			get => _frameWidth;
 			set
 			{
 				Validate(value, Parameters.FrameWidth);
 				_frameWidth = value;
-				RaisePropertyChanged(nameof(FrameWigth));
+				RaisePropertyChanged(nameof(FrameWidth));
 				RaisePropertyChanged(nameof(Errors));
 			}
 		}
@@ -193,7 +193,7 @@ namespace GlassesFrameViewModel
 
 			BridgeLength = _glassesFrameParameters.BridgeLength.ToString();
 			EndPieceLength = _glassesFrameParameters.EndPieceLength.ToString();
-			FrameWigth = _glassesFrameParameters.FrameWidth.ToString();
+			FrameWidth = _glassesFrameParameters.FrameWidth.ToString();
 			LensFrameWidth = _glassesFrameParameters.LensFrameWidth.ToString();
 			LensWidth = _glassesFrameParameters.LensWidth.ToString();
 

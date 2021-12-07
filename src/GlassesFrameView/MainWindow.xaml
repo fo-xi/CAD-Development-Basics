@@ -6,7 +6,7 @@
 		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 		xmlns:local="clr-namespace:GlassesFrameView"
 		mc:Ignorable="d"
-		Title="Оправа для очков" Height="Auto" Width="800" SizeToContent="Height">
+		Title="Оправа для очков" Height="Auto" Width="800" SizeToContent="Height" MinWidth="800" MaxWidth="800">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
@@ -132,7 +132,7 @@
 						Name="FrameWidth" 
 						Grid.Column="1"
 						Style="{StaticResource TextBoxStyle}"
-						Text ="{Binding FrameWigth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						Text ="{Binding FrameWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 					<TextBlock 
 						Grid.Column="2"

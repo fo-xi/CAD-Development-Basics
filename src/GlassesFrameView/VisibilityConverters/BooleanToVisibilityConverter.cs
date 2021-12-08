@@ -14,6 +14,11 @@ namespace GlassesFrameView.VisibilityConverters
     /// </summary>
     public class BooleanToVisibilityConverter : IValueConverter
     {
+        /// <summary>
+        /// Определяет видимость элемента управления.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <returns></returns>
         private object GetVisibility(object value)
         {
             if ((bool)value)
@@ -24,11 +29,13 @@ namespace GlassesFrameView.VisibilityConverters
             return Visibility.Collapsed;
         }
 
+        /// <inheritdoc />
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return GetVisibility(value);
         }
 
+        /// <inheritdoc />
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

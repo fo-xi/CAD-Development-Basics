@@ -54,8 +54,8 @@ namespace InventorApi
         /// <summary>
         /// Строит раму первой линзы.
         /// </summary>
-        /// <param name="outerCircleRadius">Радус внешней окружности.</param>
-        /// <param name="innerCircleRadius">Радус внутренней окружности.</param>
+        /// <param name="outerCircleRadius">Радиус внешней окружности.</param>
+        /// <param name="innerCircleRadius">Радиус внутренней окружности.</param>
         private void BuildFirstLensFrame(double outerCircleRadius, double innerCircleRadius)
         {
             var centerPoint = 
@@ -71,8 +71,8 @@ namespace InventorApi
         /// <summary>
         /// Строит раму второй линзы.
         /// </summary>
-        /// <param name="outerCircleRadius">Радус внешней окружности.</param>
-        /// <param name="innerCircleRadius">Радус внутренней окружности.</param>
+        /// <param name="outerCircleRadius">Радиус внешней окружности.</param>
+        /// <param name="innerCircleRadius">Радиус внутренней окружности.</param>
         private void BuildSecondLensFrame(double outerCircleRadius, double innerCircleRadius)
         {
             //Строим внешнюю окружность
@@ -175,7 +175,7 @@ namespace InventorApi
         /// Поиск координаты х точки на окружности с центром в начале координат.
         /// </summary>
         /// <param name="radius">Радиус окружности.</param>
-        /// <param name="y">Коррдината у.</param>
+        /// <param name="y">Координата у.</param>
         /// <param name="sign">Знак.</param>
         /// <returns>х координата точки на окружности с центром в начале координат.</returns>
         private double FindPointXCircleCenteredOrigin(double radius, double y, int sign)
@@ -186,8 +186,8 @@ namespace InventorApi
         /// <summary>
         /// Поиск х0 координаты точки центра окружности.
         /// </summary>
-        /// <param name="x">Коррдината x.</param>
-        /// <param name="y">Коррдината у.</param>
+        /// <param name="x">Координата x.</param>
+        /// <param name="y">Координата у.</param>
         /// <param name="radius">Радиус окружности.</param>
         /// <param name="sign">Знак.</param>
         /// <returns>х0 координата точки центра окружности.</returns>
@@ -199,8 +199,8 @@ namespace InventorApi
         /// <summary>
         /// Поиск х координаты точки на окружности.
         /// </summary>
-        /// <param name="x0">Коррдината x.</param>
-        /// <param name="y">Коррдината у.</param>
+        /// <param name="x0">Координата x.</param>
+        /// <param name="y">Координата у.</param>
         /// <param name="radius">Радиус окружности.</param>
         /// <param name="sign">Знак.</param>
         /// <returns>х координата точки центра окружности.</returns>

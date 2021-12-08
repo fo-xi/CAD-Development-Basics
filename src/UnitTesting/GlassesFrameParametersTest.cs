@@ -1,12 +1,11 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GlassesFrame;
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
 
 namespace UnitTesting
 {
-    [TestClass]
+    [TestFixture]
     public class GlassesFrameParametersTest
     {
         [TestCase(TestName = "Позитивный тест геттера BridgeLength")]

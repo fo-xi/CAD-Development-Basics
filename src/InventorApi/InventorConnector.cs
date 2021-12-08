@@ -78,7 +78,6 @@ namespace InventorApi
 				try
 				{
 					//Если приложение не открыто, то пытаемся его открыть
-					//TODO: RSDN (+)
 					Type inventorApplicationType = Type.GetTypeFromProgID("Inventor.Application");
 
 					InventorApplication = 
@@ -175,8 +174,6 @@ namespace InventorApi
 		/// </summary>
 		public void Fillets()
 		{
-			//TODO: Убрать дублирование (+)
-			//TODO: RSDN (+)
 			var fillets = new List<FilletDefinition>
 			{
 				//Сопряжение верхней части моста

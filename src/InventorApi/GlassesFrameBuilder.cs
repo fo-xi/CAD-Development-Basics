@@ -79,7 +79,7 @@ namespace InventorApi
             _xCoordCenter =
                 FindPointX0Circle(_secondPointBeginninBridge.X,
                     _secondPointBeginninBridge.Y, outerCircleRadius, 1);
-            //TODO: RSDN (+)
+
             var centerPoint =
                 _connector.TransientGeometry.CreatePoint2d(_xCoordCenter, 0);
 

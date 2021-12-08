@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GlassesFrame;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
 
 namespace UnitTesting
 {
-    [TestClass]
+    [TestFixture]
     public class ValidatorTest
     {
         private const double MinValue = 10;

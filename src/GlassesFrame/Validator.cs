@@ -37,6 +37,12 @@ namespace GlassesFrame
                 throw new ArgumentException
                     ("Ширина линзы должна быть меньше ширины рамы линзы");
             }
+
+            if (lensWidth == lensFrameWidth)
+            {
+                throw new ArgumentException
+                    ("Параметры \"Ширина линзы\" и \"Ширина рамы линзы\" не могут быть равны");
+            }
         }
     }
 }

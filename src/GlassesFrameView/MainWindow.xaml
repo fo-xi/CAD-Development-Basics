@@ -6,7 +6,10 @@
 		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 		xmlns:local="clr-namespace:GlassesFrameView"
 		mc:Ignorable="d"
-		Title="Оправа для очков" Height="Auto" Width="800" SizeToContent="Height" MinWidth="800" MaxWidth="800">
+		Title="Оправа для очков" Height="Auto" Width="800" SizeToContent="Height" MinWidth="800" MaxWidth="800" ResizeMode="NoResize">
+	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="VisibilityConverter"></BooleanToVisibilityConverter>
+	</Window.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
@@ -185,7 +188,8 @@
 			<TextBlock
 				Background ="#eaa"
 				Padding="2"
-				Text="{Binding Errors}">
+				Text="{Binding Errors}"
+				Visibility="{Binding HasErrors, Converter={StaticResource VisibilityConverter}}">
 			</TextBlock>
 		</Grid>
 

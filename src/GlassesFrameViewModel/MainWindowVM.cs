@@ -92,6 +92,7 @@ namespace GlassesFrameViewModel
 				_bridgeLength = value;
 				RaisePropertyChanged(nameof(BridgeLength));
 				RaisePropertyChanged(nameof(Errors));
+                RaisePropertyChanged(nameof(HasErrors));
 			}
 		}
 
@@ -107,6 +108,7 @@ namespace GlassesFrameViewModel
 				_endPieceLength = value;
 				RaisePropertyChanged(nameof(EndPieceLength));
 				RaisePropertyChanged(nameof(Errors));
+                RaisePropertyChanged(nameof(HasErrors));
 			}
 		}
 
@@ -122,6 +124,7 @@ namespace GlassesFrameViewModel
 				_frameWidth = value;
 				RaisePropertyChanged(nameof(FrameWidth));
 				RaisePropertyChanged(nameof(Errors));
+                RaisePropertyChanged(nameof(HasErrors));
 			}
 		}
 
@@ -137,7 +140,8 @@ namespace GlassesFrameViewModel
 				_lensFrameWidth = value;
 				RaisePropertyChanged(nameof(LensFrameWidth));
 				RaisePropertyChanged(nameof(Errors));
-            }
+                RaisePropertyChanged(nameof(HasErrors));
+			}
 		}
 
 		/// <summary>
@@ -152,7 +156,8 @@ namespace GlassesFrameViewModel
 				_lensWidth = value;
                 RaisePropertyChanged(nameof(LensWidth));
 				RaisePropertyChanged(nameof(Errors));
-            }
+                RaisePropertyChanged(nameof(HasErrors));
+			}
 		}
 
 		/// <summary>
@@ -286,10 +291,15 @@ namespace GlassesFrameViewModel
 
 			for (int i = 0; i < _errorsByPropertyName.Keys.Count; i++)
 			{
+                if (i != 0)
+                {
+                    errors += "\n";
+				}
+
 				var value = _errorsByPropertyName.Values.ToArray()[i];
 				foreach (var error in value)
 				{
-					errors += $"\n{error}";
+					errors += $"{error}";
 				}
 			}
 			return errors;

@@ -54,6 +54,10 @@ namespace UnitTesting
                       "если значение ширины линзы больше значения ширины рамы линзы",
             TestName = "Присвоение значения 54 в качестве значения ширины линзы, " +
                        "что больше значения ширины рамы линзы")]
+        [TestCase(52, "Исключение возникнет, " +
+                      "если значения ширины линзы и ширины рамы линзы равны",
+            TestName = "Присвоение значения 52 в качестве значения ширины линзы, " +
+                       "что равно значению ширины рамы линзы")]
         public void TestIsLensWidth_IncorrectValue(double wrongValueLensWidth, string message)
         {
             Assert.Throws<ArgumentException>(() =>

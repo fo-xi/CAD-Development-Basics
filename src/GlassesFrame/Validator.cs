@@ -38,7 +38,7 @@ namespace GlassesFrame
                     ("Ширина линзы должна быть меньше ширины рамы линзы");
             }
 
-            //TODO: UnitTests
+            //TODO: UnitTests (+)
             if (lensWidth == lensFrameWidth)
             {
                 throw new ArgumentException

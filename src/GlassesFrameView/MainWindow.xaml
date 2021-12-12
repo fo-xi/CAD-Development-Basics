@@ -3,12 +3,21 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:sys="clr-namespace:System;assembly=mscorlib"
+		xmlns:glassesFrame="clr-namespace:GlassesFrame;assembly=GlassesFrame"
 		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 		xmlns:local="clr-namespace:GlassesFrameView"
 		mc:Ignorable="d"
 		Title="Оправа для очков" Height="Auto" Width="800" SizeToContent="Height" MinWidth="800" MaxWidth="800" ResizeMode ="CanMinimize">
 	<Window.Resources>
 		<BooleanToVisibilityConverter x:Key="VisibilityConverter"></BooleanToVisibilityConverter>
+
+		<ObjectDataProvider x:Key="LensShape" MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+			<ObjectDataProvider.MethodParameters>
+				<x:Type TypeName="glassesFrame:LensShape"/>
+			</ObjectDataProvider.MethodParameters>
+		</ObjectDataProvider>
 	</Window.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
@@ -27,7 +36,7 @@
 			Grid.Column="0"
 			Margin="5"
 			Header="Введите параметры">
-
+			
 			<Grid 
 				Margin="5">
 				<Grid.RowDefinitions>
@@ -36,10 +45,36 @@
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
-				
+
+				<Grid Grid.Row="0" 
+					  Margin="5">
+					
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					
+					<TextBlock
+						Grid.Column="0"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Center"
+						Width="100"
+						Text="Форма:" />
+					<ComboBox
+						Grid.Column="1"
+						Margin="5 0 0 0"
+						VerticalAlignment="Center"
+						IsEditable ="False"
+						ItemsSource="{Binding Source={StaticResource LensShape}}"
+						SelectedValue="{Binding SelectedLensShape, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				</Grid>
+
 				<Grid 
-					Grid.Row="0"
+					Grid.Row="1"
 					Margin="5">
 
 					<Grid.ColumnDefinitions>
@@ -65,32 +100,6 @@
 				</Grid>
 
 				<Grid 
-					Grid.Row="1"
-					Margin="5">
-
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="Auto" />
-					</Grid.ColumnDefinitions>
-
-					<TextBlock 
-						Grid.Column="0"
-						Text="Ширина линзы (B)" 
-						HorizontalAlignment="Left"/>
-
-					<TextBox
-						Name="LensWidth" 
-						Grid.Column="1"
-						Style="{StaticResource TextBoxStyle}"
-						Text ="{Binding LensWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-					<TextBlock 
-						Grid.Column="2"
-						Style="{StaticResource TextBlockStyle}"/>
-				</Grid>
-
-				<Grid 
 					Grid.Row="2"
 					Margin="5">
 
@@ -102,14 +111,15 @@
 
 					<TextBlock 
 						Grid.Column="0"
-						Text="Ширина рамы линзы (C)" 
+						Text="Радиус линзы (B)" 
 						HorizontalAlignment="Left"/>
 
-					<TextBox 
-						Name="LensFrameWidth" 
+					<TextBox
+						Name="LensRadius" 
 						Grid.Column="1"
+						IsEnabled="{Binding IsEnabledRadius}"
 						Style="{StaticResource TextBoxStyle}"
-						Text ="{Binding LensFrameWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						Text ="{Binding LensRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 					<TextBlock 
 						Grid.Column="2"
@@ -118,6 +128,33 @@
 
 				<Grid 
 					Grid.Row="3"
+					Margin="5">
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<TextBlock 
+						Grid.Column="0"
+						Text="Радиус рамы линзы (C)" 
+						HorizontalAlignment="Left"/>
+
+					<TextBox 
+						Name="LensFrameRadius" 
+						Grid.Column="1"
+						IsEnabled="{Binding IsEnabledRadius}"
+						Style="{StaticResource TextBoxStyle}"
+						Text ="{Binding LensFrameRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+					<TextBlock 
+						Grid.Column="2"
+						Style="{StaticResource TextBlockStyle}"/>
+				</Grid>
+
+				<Grid 
+					Grid.Row="4"
 					Margin="5">
 
 					<Grid.ColumnDefinitions>
@@ -143,7 +180,7 @@
 				</Grid>
 
 				<Grid 
-					Grid.Row="4"
+					Grid.Row="5"
 					Margin="5">
 
 					<Grid.ColumnDefinitions>
@@ -162,6 +199,60 @@
 						Grid.Column="1"
 						Style="{StaticResource TextBoxStyle}"
 						Text ="{Binding EndPieceLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+					<TextBlock 
+						Grid.Column="2"
+						Style="{StaticResource TextBlockStyle}"/>
+				</Grid>
+
+				<Grid 
+					Grid.Row="6"
+					Margin="5">
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<TextBlock 
+						Grid.Column="0"
+						Text="Ширина рамы линзы (E)" 
+						HorizontalAlignment="Left"/>
+
+					<TextBox 
+						Name="LensFrameWidth" 
+						Grid.Column="1"
+						IsEnabled="{Binding IsEnabledWidthLength}"
+						Style="{StaticResource TextBoxStyle}"
+						Text ="{Binding LensFrameWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+					<TextBlock 
+						Grid.Column="2"
+						Style="{StaticResource TextBlockStyle}"/>
+				</Grid>
+
+				<Grid 
+					Grid.Row="7"
+					Margin="5">
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<TextBlock 
+						Grid.Column="0"
+						Text="Высота рамы линзы (F)" 
+						HorizontalAlignment="Left"/>
+
+					<TextBox 
+						Name="LensFrameHeight" 
+						Grid.Column="1"
+						IsEnabled="{Binding IsEnabledWidthLength}"
+						Style="{StaticResource TextBoxStyle}"
+						Text ="{Binding LensFrameHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 					<TextBlock 
 						Grid.Column="2"

@@ -57,14 +57,39 @@ namespace GlassesFrameViewModel
 		private string _frameWidth;
 
 		/// <summary>
-		/// Ширина рамы линзы.
+		/// Радиус рамы линзы.
+		/// </summary>
+		private string _lensFrameRadius;
+
+		/// <summary>
+		/// Радиус линзы.
+		/// </summary>
+		private string _lensRadius;
+
+		/// <summary>
+		/// Ширина рамы линзы
 		/// </summary>
 		private string _lensFrameWidth;
 
 		/// <summary>
-		/// Ширина линзы.
+		/// Высота рамы линзы.
 		/// </summary>
-		private string _lensWidth;
+		private string _lensFrameHeight;
+
+		/// <summary>
+		/// Форма линзы.
+		/// </summary>
+		private LensShape _selectedLensShape;
+
+		/// <summary>
+		///  Доступ к полям длинны и ширины рамы ринзы.
+		/// </summary>
+		private bool _isEnabledWidthLength;
+
+		/// <summary>
+		/// Доступ к полям радиуса линзы и рамы линзы.
+		/// </summary>
+		private bool _isEnabledRadius;
 
 		/// <summary>
 		/// Содержит ошибки свойства.
@@ -129,6 +154,38 @@ namespace GlassesFrameViewModel
 		}
 
 		/// <summary>
+		/// Возвращает и задает радиус рамы линзы.
+		/// </summary>
+		public string LensFrameRadius
+		{
+			get => _lensFrameRadius;
+			set
+			{
+				Validate(value, Parameters.LensFrameRadius);
+				_lensFrameRadius = value;
+				RaisePropertyChanged(nameof(LensFrameRadius));
+				RaisePropertyChanged(nameof(Errors));
+                RaisePropertyChanged(nameof(HasErrors));
+			}
+		}
+
+		/// <summary>
+		/// Возвращает и задает радиус линзы.
+		/// </summary>
+		public string LensRadius
+		{
+			get => _lensRadius;
+			set
+			{
+				Validate(value, Parameters.LensRadius);
+				_lensRadius = value;
+                RaisePropertyChanged(nameof(LensRadius));
+				RaisePropertyChanged(nameof(Errors));
+                RaisePropertyChanged(nameof(HasErrors));
+			}
+		}
+
+		/// <summary>
 		/// Возвращает и задает ширину рамы линзы.
 		/// </summary>
 		public string LensFrameWidth
@@ -140,23 +197,66 @@ namespace GlassesFrameViewModel
 				_lensFrameWidth = value;
 				RaisePropertyChanged(nameof(LensFrameWidth));
 				RaisePropertyChanged(nameof(Errors));
-                RaisePropertyChanged(nameof(HasErrors));
+				RaisePropertyChanged(nameof(HasErrors));
 			}
 		}
 
 		/// <summary>
-		/// Возвращает и задает ширину линзы.
+		/// Возвращает и задает высоту рамы линзы.
 		/// </summary>
-		public string LensWidth
+		public string LensFrameHeight
 		{
-			get => _lensWidth;
+			get => _lensFrameHeight;
 			set
 			{
-				Validate(value, Parameters.LensWidth);
-				_lensWidth = value;
-                RaisePropertyChanged(nameof(LensWidth));
+				Validate(value, Parameters.LensFrameHeight);
+				_lensFrameHeight = value;
+				RaisePropertyChanged(nameof(LensFrameHeight));
 				RaisePropertyChanged(nameof(Errors));
-                RaisePropertyChanged(nameof(HasErrors));
+				RaisePropertyChanged(nameof(HasErrors));
+			}
+		}
+
+		/// <summary>
+		/// Возвращает и задает форму линзы.
+		/// </summary>
+		public LensShape SelectedLensShape
+		{
+			get => _selectedLensShape;
+			set
+			{
+
+				_selectedLensShape = value;
+				ChoosingLensShape();
+				RaisePropertyChanged(nameof(SelectedLensShape));
+			}
+		}
+
+		/// <summary>
+		/// Доступ к полям длинны и ширины рамы ринзы.
+		/// </summary>
+		public bool IsEnabledWidthLength
+		{
+			get => _isEnabledWidthLength;
+			set
+			{
+
+				_isEnabledWidthLength = value;
+				RaisePropertyChanged(nameof(IsEnabledWidthLength));
+			}
+		}
+
+		/// <summary>
+		/// Доступ к полям радиуса линзы и рамы линзы.
+		/// </summary>ы
+		public bool IsEnabledRadius
+		{
+			get => _isEnabledRadius;
+			set
+			{
+
+				_isEnabledRadius = value;
+				RaisePropertyChanged(nameof(IsEnabledRadius));
 			}
 		}
 
@@ -172,6 +272,7 @@ namespace GlassesFrameViewModel
 		public MainWindowVM(IMessageBoxService messageBoxService)
 		{
 			_messageBoxService = messageBoxService;
+			IsEnabledRadius = true;
 
 			_parameters = new Dictionary<Parameters, Action<double>>
 			{
@@ -181,10 +282,14 @@ namespace GlassesFrameViewModel
 				_glassesFrameParameters.EndPieceLength = value },
 				{ Parameters.FrameWidth, value => 
 				_glassesFrameParameters.FrameWidth = value },
-				{ Parameters.LensFrameWidth, value => 
-				_glassesFrameParameters.LensFrameWidth = value },
-				{ Parameters.LensWidth, value => 
-				_glassesFrameParameters.LensWidth = value }
+				{ Parameters.LensFrameRadius, value => 
+				_glassesFrameParameters.LensFrameRadius = value },
+				{ Parameters.LensRadius, value => 
+				_glassesFrameParameters.LensRadius = value},
+				{ Parameters.LensFrameWidth, value =>
+				_glassesFrameParameters.LensFrameWidth = value},
+				{ Parameters.LensFrameHeight, value =>
+				_glassesFrameParameters.LensFrameHeight = value}
 			};
 
 			_parametersName = new Dictionary<Parameters, string>
@@ -192,15 +297,19 @@ namespace GlassesFrameViewModel
 				{ Parameters.BridgeLength, "Длина моста" },
 				{ Parameters.EndPieceLength, "Длина концевого элемента" },
 				{ Parameters.FrameWidth, "Ширина оправы" },
+				{ Parameters.LensFrameRadius, "Радиус рамы линзы" },
+				{ Parameters.LensRadius, "Радиус линзы" },
 				{ Parameters.LensFrameWidth, "Ширина рамы линзы" },
-				{ Parameters.LensWidth, "Ширина линзы" }
+				{ Parameters.LensFrameHeight, "Высота рамы линзы" }
 			};
 
 			BridgeLength = _glassesFrameParameters.BridgeLength.ToString();
 			EndPieceLength = _glassesFrameParameters.EndPieceLength.ToString();
 			FrameWidth = _glassesFrameParameters.FrameWidth.ToString();
+			LensFrameRadius = _glassesFrameParameters.LensFrameRadius.ToString();
+			LensRadius = _glassesFrameParameters.LensRadius.ToString();
 			LensFrameWidth = _glassesFrameParameters.LensFrameWidth.ToString();
-			LensWidth = _glassesFrameParameters.LensWidth.ToString();
+			LensFrameHeight = _glassesFrameParameters.LensFrameHeight.ToString();
 
 			ApplyCommand = new RelayCommand(Apply);
 		}
@@ -217,7 +326,32 @@ namespace GlassesFrameViewModel
 			}
 			else 
 			{
-				_glassesFrameBuilder.Build(_glassesFrameParameters);
+				if (SelectedLensShape == LensShape.Круглая)
+                {
+					_glassesFrameBuilder.Build(_glassesFrameParameters);
+				}
+
+				if (SelectedLensShape == LensShape.Прямоугольная)
+				{ 
+					
+				}
+			}
+		}
+
+		/// <summary>
+		/// Реакция при выборе формы очков 
+		/// </summary>
+		private void ChoosingLensShape()
+		{
+			if (SelectedLensShape == LensShape.Прямоугольная)
+			{
+				IsEnabledWidthLength = true;
+				IsEnabledRadius = false;
+			}
+			if (SelectedLensShape == LensShape.Круглая)
+			{
+				IsEnabledWidthLength = false;
+				IsEnabledRadius = true;
 			}
 		}
 
@@ -266,10 +400,10 @@ namespace GlassesFrameViewModel
 
 			try
 			{
-                if (parameter == Parameters.LensFrameWidth || parameter == Parameters.LensWidth)
+                if (parameter == Parameters.LensFrameRadius || parameter == Parameters.LensRadius)
                 {
-                    ClearErrors(Parameters.LensFrameWidth.ToString());
-                    ClearErrors(Parameters.LensWidth.ToString());
+                    ClearErrors(Parameters.LensFrameRadius.ToString());
+                    ClearErrors(Parameters.LensRadius.ToString());
                 }
 
                 ClearErrors(parameter.ToString());

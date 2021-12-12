@@ -8,7 +8,9 @@
           BridgeLength,
           EndPieceLength,
           FrameWidth,
+          LensFrameRadius,
+          LensRadius,
           LensFrameWidth,
-          LensWidth
-     }
+          LensFrameHeight
+    }
 }

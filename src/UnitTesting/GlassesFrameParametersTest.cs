@@ -129,97 +129,97 @@ namespace UnitTesting
             }, message);
         }
 
-        [TestCase(TestName = "Позитивный тест геттера LensFrameWidth")]
-        public void TestLensFrameWidthGet_CorrectValue()
+        [TestCase(TestName = "Позитивный тест геттера LensFrameRadius")]
+        public void TestLensFrameRadiusGet_CorrectValue()
         {
             var expected = 56;
             var parameters = new GlassesFrameParameters()
             {
-                LensFrameWidth = expected
+                LensFrameRadius = expected
             };
-            var actual = parameters.LensFrameWidth;
-            Assert.AreEqual(expected, actual, "Геттер LensFrameWidth возвращает " +
-                                              "неправильное значение ширины рамы линзы");
+            var actual = parameters.LensFrameRadius;
+            Assert.AreEqual(expected, actual, "Геттер LensFrameRadius возвращает " +
+                                              "неправильное значение радиуса рамы линзы");
         }
 
-        [TestCase(TestName = "Позитивный тест сеттера LensFrameWidth")]
-        public void TestLensFrameWidthSet_CorrectValue()
+        [TestCase(TestName = "Позитивный тест сеттера LensFrameRadius")]
+        public void TestLensFrameRadiusSet_CorrectValue()
         {
             var expected = 56;
             var parameters = new GlassesFrameParameters();
             Assert.DoesNotThrow(() => 
             {
-                parameters.LensFrameWidth = expected;
-            }, "Сеттер LensFrameWidth принимает неправильное " +
-                   "значение ширины рамы линзы");
+                parameters.LensFrameRadius = expected;
+            }, "Сеттер LensFrameRadius принимает неправильное " +
+                   "значение радиуса рамы линзы");
         }
 
         [TestCase(46, "Исключение возникнет, " +
                      "если значение не входит в диапазон [52, 58]",
-            TestName = "Присвоение значения 46 в качестве значения ширины рамы линзы")]
+            TestName = "Присвоение значения 46 в качестве значения радиуса рамы линзы")]
         [TestCase(100,
             "Исключение возникнет, если значение не входит в диапазон [52, 58]",
-            TestName = "Присвоение значения 100 в качестве значения ширины рамы линзы")]
+            TestName = "Присвоение значения 100 в качестве значения радиуса рамы линзы")]
         [TestCase(52,
-            "Исключение возникнет, если значение ширины линзы " +
-            "больше значения ширины рамы линзы",
-            TestName = "Присвоение значения 52 в качестве значения ширины рамы линзы, " +
-                       "что меньше значения ширины линзы")]
-        public void TestLensFrameWidth_InvalidLensFrameWidth(double wrongLensFrameWidth,
+            "Исключение возникнет, если значение радиуса линзы " +
+            "больше значения радиуса рамы линзы",
+            TestName = "Присвоение значения 52 в качестве значения радиуса рамы линзы, " +
+                       "что меньше значения радиуса линзы")]
+        public void TestLensFrameRadius_InvalidLensFrameWidth(double wrongLensFrameWidth,
             string message)
         {
             var parameters = new GlassesFrameParameters();
             Assert.Throws<ArgumentException>(() =>
             {
-                parameters.LensWidth = 54;
-                parameters.LensFrameWidth = wrongLensFrameWidth;
+                parameters.LensRadius = 54;
+                parameters.LensFrameRadius = wrongLensFrameWidth;
             }, message);
         }
 
-        [TestCase(TestName = "Позитивный тест геттера LensWidth")]
-        public void TestLensWidthGet_CorrectValue()
+        [TestCase(TestName = "Позитивный тест геттера LensRadius")]
+        public void TestLensRadiusGet_CorrectValue()
         {
             var expected = 50;
             var parameters = new GlassesFrameParameters()
             {
-                LensWidth = expected
+                LensRadius = expected
             };
-            var actual = parameters.LensWidth;
-            Assert.AreEqual(expected, actual, "Геттер LensWidth возвращает " +
-                                              "неправильное значение ширины линзы");
+            var actual = parameters.LensRadius;
+            Assert.AreEqual(expected, actual, "Геттер LensRadius возвращает " +
+                                              "неправильное значение радиуса линзы");
         }
 
-        [TestCase(TestName = "Позитивный тест сеттера LensWidth")]
-        public void TestLensWidthSet_CorrectValue()
+        [TestCase(TestName = "Позитивный тест сеттера LensRadius")]
+        public void TestLensRadiusSet_CorrectValue()
         {
             var expected = 50;
             var parameters = new GlassesFrameParameters();
             Assert.DoesNotThrow(() =>
             {
-                parameters.LensWidth = expected;
-            }, "Сеттер LensWidth принимает неправильное " +
-                   "значение ширины линзы");
+                parameters.LensRadius = expected;
+            }, "Сеттер LensRadius принимает неправильное " +
+                   "значение радиуса линзы");
         }
 
         [TestCase(36, "Исключение возникнет, " +
                       "если значение не входит в диапазон [48, 54]",
-            TestName = "Присвоение значения 36 в качестве значения ширины линзы")]
+            TestName = "Присвоение значения 36 в качестве значения радиуса линзы")]
         [TestCase(100,
             "Исключение возникнет, если значение не входит в диапазон [48, 54]",
-            TestName = "Присвоение значения 100 в качестве значения ширины линзы")]
+            TestName = "Присвоение значения 100 в качестве значения радиуса линзы")]
         [TestCase(54,
-            "Исключение возникнет, если значение ширины линзы " +
-            "больше значения ширины рамы линзы",
-            TestName = "Присвоение значения 54 в качестве значения ширины линзы, " +
-                       "что больше значения ширины рамы линзы")]
-        public void TestLensWidth_InvalidLensWidth(double wrongLensWidth,
+            "Исключение возникнет, если значение радиуса линзы " +
+            "больше значения радиуса рамы линзы",
+            TestName = "Присвоение значения 54 в качестве значения радиуса линзы, " +
+                       "что больше значения радиуса рамы линзы")]
+        public void TestLensRadius_InvalidLensWidth(double wrongLensWidth,
             string message)
         {
             var parameters = new GlassesFrameParameters();
             Assert.Throws<ArgumentException>(() =>
             {
-                parameters.LensFrameWidth = 52;
-                parameters.LensWidth = wrongLensWidth;
+                parameters.LensFrameRadius = 52;
+                parameters.LensRadius = wrongLensWidth;
             }, message);
         }
     }

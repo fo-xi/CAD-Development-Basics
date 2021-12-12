@@ -125,6 +125,10 @@
       <Project>{445252a0-4099-4915-93cc-3f240693ba18}</Project>
       <Name>GlassesFrameViewModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GlassesFrame\GlassesFrame.csproj">
+      <Project>{c58e002e-3175-4e18-979d-e5974d8dd5f0}</Project>
+      <Name>GlassesFrame</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -42,10 +42,10 @@ namespace InventorApi
         {
             _connector.CreateNewDocument();
             _connector.Sketch = _connector.MakeNewSketch(0);
-            double outerCircleRadius = parameters.LensFrameWidth / 2;
-            BuildFirstLensFrame(outerCircleRadius, parameters.LensWidth / 2);
+            double outerCircleRadius = parameters.LensFrameRadius / 2;
+            BuildFirstLensFrame(outerCircleRadius, parameters.LensRadius / 2);
             BuildeBridge(outerCircleRadius, parameters.BridgeLength);
-            BuildSecondLensFrame(outerCircleRadius, parameters.LensWidth / 2);
+            BuildSecondLensFrame(outerCircleRadius, parameters.LensRadius / 2);
             BuildEndElement(outerCircleRadius, parameters.EndPieceLength);
             _connector.Extrude(parameters.FrameWidth);
             _connector.Fillets();

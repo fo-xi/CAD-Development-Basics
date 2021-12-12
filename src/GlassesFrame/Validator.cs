@@ -35,14 +35,14 @@ namespace GlassesFrame
             if (lensWidth > lensFrameWidth)
             {
                 throw new ArgumentException
-                    ("Ширина линзы должна быть меньше ширины рамы линзы");
+                    ("Радиус линзы должен быть меньше радиуса рамы линзы");
             }
 
             //TODO: UnitTests (+)
             if (lensWidth == lensFrameWidth)
             {
                 throw new ArgumentException
-                    ("Параметры \"Ширина линзы\" и \"Ширина рамы линзы\" не могут быть равны");
+                    ("Параметры \"Радиус линзы\" и \"Радиус рамы линзы\" не могут быть равны");
             }
         }
     }

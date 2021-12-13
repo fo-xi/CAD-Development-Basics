@@ -222,5 +222,87 @@ namespace UnitTesting
                 parameters.LensRadius = wrongLensWidth;
             }, message);
         }
+
+        [TestCase(TestName = "Позитивный тест геттера LensFrameWidth")]
+        public void TestLensFrameWidthGet_CorrectValue()
+        {
+            var expected = 52;
+            var parameters = new GlassesFrameParameters()
+            {
+                LensFrameWidth = expected
+            };
+            var actual = parameters.LensFrameWidth;
+            Assert.AreEqual(expected, actual, "Геттер LensFrameWidth возвращает " +
+                                              "неправильное значение ширины рамы линзы");
+        }
+
+        [TestCase(TestName = "Позитивный тест сеттера LensFrameWidth")]
+        public void TestLensFrameWidthSet_CorrectValue()
+        {
+            var expected = 52;
+            var parameters = new GlassesFrameParameters();
+            Assert.DoesNotThrow(() =>
+            {
+                parameters.LensFrameWidth = expected;
+            }, "Сеттер LensFrameWidth принимает неправильное " +
+                   "значение ширины рамы линзы");
+        }
+
+        [TestCase(1, "Исключение возникнет, " +
+                     "если значение не входит в диапазон [48, 56]",
+            TestName = "Присвоение значения 1 в качестве значения ширины рамы линзы")]
+        [TestCase(100,
+            "Исключение возникнет, если значение не входит в диапазон [48, 56]",
+            TestName = "Присвоение значения 100 в качестве значения ширины рамы линзы")]
+        public void TestLensFrameWidth_InvalidLensFrameWidth(double wrongLensFrameWidth,
+            string message)
+        {
+            var parameters = new GlassesFrameParameters();
+            Assert.Throws<ArgumentException>(() =>
+            {
+                parameters.LensFrameWidth = wrongLensFrameWidth;
+            }, message);
+        }
+
+        [TestCase(TestName = "Позитивный тест геттера LensFrameHeight")]
+        public void TestLensFrameHeighthGet_CorrectValue()
+        {
+            var expected = 40;
+            var parameters = new GlassesFrameParameters()
+            {
+                LensFrameHeight = expected
+            };
+            var actual = parameters.LensFrameHeight;
+            Assert.AreEqual(expected, actual, "Геттер LensFrameHeight возвращает " +
+                                              "неправильное значение высоты рамы линзы");
+        }
+
+        [TestCase(TestName = "Позитивный тест сеттера LensFrameHeight")]
+        public void TestLensFrameHeightSet_CorrectValue()
+        {
+            var expected = 40;
+            var parameters = new GlassesFrameParameters();
+            Assert.DoesNotThrow(() =>
+            {
+                parameters.LensFrameHeight = expected;
+            }, "Сеттер LensFrameHeight принимает неправильное " +
+                   "значение высоты рамы линзы");
+        }
+
+        [TestCase(1, "Исключение возникнет, " +
+             "если значение не входит в диапазон [30, 45]",
+            TestName = "Присвоение значения 1 в качестве значения высоты рамы линзы")]
+        [TestCase(100,
+    "Исключение возникнет, если значение не входит в диапазон [30, 45]",
+            TestName = "Присвоение значения 100 в качестве значения высоты рамы линзы")]
+        public void TestLensFrameHeight_InvalidLensFrameWidth(double wrongLensFrameHeight,
+    string message)
+        {
+            var parameters = new GlassesFrameParameters();
+            Assert.Throws<ArgumentException>(() =>
+            {
+                parameters.LensFrameHeight = wrongLensFrameHeight;
+            }, message);
+        }
     }
 }

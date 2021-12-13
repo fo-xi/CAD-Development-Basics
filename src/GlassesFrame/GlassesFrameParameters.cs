@@ -90,7 +90,7 @@ namespace GlassesFrame
 			get => _lensFrameRadius;
 			set
 			{
-				Validator.AssertValue(value, 52, 58, "Ширина рамы линзы");
+				Validator.AssertValue(value, 52, 58, "Радиус рамы линзы");
 				Validator.IsLensWidth(LensRadius, value);
 				_lensFrameRadius = value;
 			}
@@ -104,7 +104,7 @@ namespace GlassesFrame
 			get => _lensRadius;
 			set
 			{
-				Validator.AssertValue(value, 48, 54, "Ширина линзы");
+				Validator.AssertValue(value, 48, 54, "Радиус линзы");
 				Validator.IsLensWidth(value, LensFrameRadius);
                 _lensRadius = value;
 			}

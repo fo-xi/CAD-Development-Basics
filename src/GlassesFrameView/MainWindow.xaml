@@ -111,60 +111,6 @@
 
 					<TextBlock 
 						Grid.Column="0"
-						Text="Радиус линзы (B)" 
-						HorizontalAlignment="Left"/>
-
-					<TextBox
-						Name="LensRadius" 
-						Grid.Column="1"
-						IsEnabled="{Binding IsEnabledRadius}"
-						Style="{StaticResource TextBoxStyle}"
-						Text ="{Binding LensRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-					<TextBlock 
-						Grid.Column="2"
-						Style="{StaticResource TextBlockStyle}"/>
-				</Grid>
-
-				<Grid 
-					Grid.Row="3"
-					Margin="5">
-
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="Auto" />
-					</Grid.ColumnDefinitions>
-
-					<TextBlock 
-						Grid.Column="0"
-						Text="Радиус рамы линзы (C)" 
-						HorizontalAlignment="Left"/>
-
-					<TextBox 
-						Name="LensFrameRadius" 
-						Grid.Column="1"
-						IsEnabled="{Binding IsEnabledRadius}"
-						Style="{StaticResource TextBoxStyle}"
-						Text ="{Binding LensFrameRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-					<TextBlock 
-						Grid.Column="2"
-						Style="{StaticResource TextBlockStyle}"/>
-				</Grid>
-
-				<Grid 
-					Grid.Row="4"
-					Margin="5">
-
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="Auto" />
-					</Grid.ColumnDefinitions>
-
-					<TextBlock 
-						Grid.Column="0"
 						Text="Ширина оправы" 
 						HorizontalAlignment="Left"/>
 
@@ -180,7 +126,7 @@
 				</Grid>
 
 				<Grid 
-					Grid.Row="5"
+					Grid.Row="3"
 					Margin="5">
 
 					<Grid.ColumnDefinitions>
@@ -206,8 +152,9 @@
 				</Grid>
 
 				<Grid 
-					Grid.Row="6"
-					Margin="5">
+					Grid.Row="4"
+					Margin="5"
+					Visibility="{Binding IsEnabledRadius, Converter={StaticResource VisibilityConverter}}">
 
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*" />
@@ -217,8 +164,63 @@
 
 					<TextBlock 
 						Grid.Column="0"
-						Text="Ширина рамы линзы (E)" 
+						Text="Радиус линзы (B)" 
 						HorizontalAlignment="Left"/>
+
+					<TextBox
+						Name="LensRadius" 
+						Grid.Column="1"
+						IsEnabled="{Binding IsEnabledRadius}"
+						Style="{StaticResource TextBoxStyle}"
+						Text ="{Binding LensRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+					<TextBlock 
+						Grid.Column="2"
+						Style="{StaticResource TextBlockStyle}"/>
+				</Grid>
+
+				<Grid 
+					Grid.Row="5"
+					Margin="5"
+					Visibility="{Binding IsEnabledRadius, Converter={StaticResource VisibilityConverter}}">
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<TextBlock 
+						Grid.Column="0"
+						Text="Радиус рамы линзы (C)" 
+						HorizontalAlignment="Left"/>
+
+					<TextBox 
+						Name="LensFrameRadius" 
+						Grid.Column="1"
+						IsEnabled="{Binding IsEnabledRadius}"
+						Style="{StaticResource TextBoxStyle}"
+						Text ="{Binding LensFrameRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+					<TextBlock 
+						Grid.Column="2"
+						Style="{StaticResource TextBlockStyle}"/>
+				</Grid>
+				
+				<Grid 
+					Grid.Row="6"
+					Margin="5"
+					Visibility="{Binding IsEnabledWidthLength, Converter={StaticResource VisibilityConverter}}">
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<TextBlock 
+						Grid.Column="0"
+						Text="Ширина рамы линзы (E)" Margin="0,0,36.6,-0.8"/>
 
 					<TextBox 
 						Name="LensFrameWidth" 
@@ -234,7 +236,8 @@
 
 				<Grid 
 					Grid.Row="7"
-					Margin="5">
+					Margin="5"
+					Visibility="{Binding IsEnabledWidthLength, Converter={StaticResource VisibilityConverter}}">
 
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*" />

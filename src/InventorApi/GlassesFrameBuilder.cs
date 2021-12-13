@@ -267,7 +267,8 @@ namespace InventorApi
 		/// <param name="height">Высота рамы.</param>
 		/// <param name="width">Ширина рамы.</param>
 		/// <param name="bridgeLength">Длина моста.</param>
-		private void BuildSecondRectangularLensFrame(double height, double width, double bridgeLength)
+		private void BuildSecondRectangularLensFrame(double height, 
+			double width, double bridgeLength)
 		{
 			var distanceSecondLens = width + bridgeLength;
 
@@ -298,7 +299,8 @@ namespace InventorApi
 		/// <param name="bridgeLength">Длина моста.</param>
 		/// <param name="height">Высота рамы линзы.</param>
 		/// <param name="width">Ширина рамы линзы.</param>
-		private void BuildeBridgeRectangularLens(double bridgeLength, double height, double width)
+		private void BuildeBridgeRectangularLens(double bridgeLength,
+			double height, double width)
 		{
 			//Расстояние между центром и нижней частью моста
 			var heightLowerPartBridge = 5;
@@ -324,7 +326,8 @@ namespace InventorApi
 		/// <param name="width">Ширина рамы.</param>
 		/// <param name="bridgeLength">Длина моста.</param>
 		/// <param name="endPieceLength">Длина концевых элементов.</param>
-		private void BuildEndElementRectangularLens(double height, double width, double bridgeLength, double endPieceLength)
+		private void BuildEndElementRectangularLens(double height, double width,
+			double bridgeLength, double endPieceLength)
 		{
 			//Ширина концевого элемента
 			var endPieceWidth = 3.5;
@@ -348,7 +351,8 @@ namespace InventorApi
 
 			//Вторая точка концевого элемента второй рамы линзы
 			var secondPointEndElement2 =
-				_connector.TransientGeometry.CreatePoint2d(distanceSecondEndElement1 + endPieceLength,
+				_connector.TransientGeometry.CreatePoint2d
+				(distanceSecondEndElement1 + endPieceLength,
 				(height / 2) + (endPieceWidth / 2));
 
 			//Строим концевой элемент первой рамы линзы

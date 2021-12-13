@@ -38,6 +38,11 @@ namespace InventorApi
 		private const double RadiusBottomEndPieces = 0.3;
 
 		/// <summary>
+		/// Радиус для построения сопряжения внутренних прямоугольников линз.
+		/// </summary>
+		private const double RadiusiLens = 0.6;
+
+		/// <summary>
 		/// Возвращает и задает приложение Inventor.
 		/// </summary>
 		public Application InventorApplication { get; set; }
@@ -170,7 +175,7 @@ namespace InventorApi
 		}
 
 		/// <summary>
-		/// Создание множества сопряжений.
+		/// Создание множества сопряжений для оправы с кругрыми линзами.
 		/// </summary>
 		public void FilletsRoundLens()
 		{
@@ -184,6 +189,45 @@ namespace InventorApi
 				CreateFillet(6, 3, 1, RadiusTopEndPieces),
 				//Сопряжение нижних частей концевых элементов
 				CreateFillet(7, 4, 1, RadiusBottomEndPieces)
+			};
+
+			foreach (var fillet in fillets)
+			{
+				PartDocument.ComponentDefinition.Features.FilletFeatures.Add(fillet);
+			}
+		}
+
+		/// <summary>
+		/// Создание множества сопряжений для оправы с прямоугольными линзами.
+		/// </summary>
+		public void FilletsRectangularLens()
+		{
+			var fillets = new List<FilletDefinition>
+			{
+				//Сопряжение верхней части моста
+				CreateFillet(19, 11, 1, RadiusTopBridge),
+				//Сопряжение нижней части моста
+				CreateFillet(16, 10, 1, RadiusBottomBridge),
+				//Сопряжение верхних частей концевых элементов
+				CreateFillet(15, 13, 1, RadiusTopEndPieces),
+				//Сопряжение нижних частей концевых элементов
+				CreateFillet(17, 9, 1, RadiusBottomEndPieces),
+				//Сопряжение верхних частей внутреннего прямоугольника первой линзы
+				CreateFillet(5, 6, 2, RadiusiLens),
+				//Сопряжение нижних частей внутреннего прямоугольника первой линзы
+				CreateFillet(8, 7, 2, RadiusiLens),
+				//Сопряжение верхних частей внутреннего прямоугольника второй линзы
+				CreateFillet(1, 2, 2, RadiusiLens),
+				//Сопряжение нижних частей внутреннего прямоугольника второй линзы
+				CreateFillet(4, 3, 2, RadiusiLens),
+				//Сопряжение верхних частей внешнего прямоугольника первой линзы
+				CreateFillet(15, 19, 3, RadiusiLens),
+				//Сопряжение нижних частей внешнего прямоугольника первой линзы
+				CreateFillet(17, 16, 3, RadiusiLens),
+				//Сопряжение верхних частей внешнего прямоугольника второй линзы
+				CreateFillet(11, 13, 3, RadiusiLens),
+				//Сопряжение нижних частей внешнего прямоугольника второй линзы
+				CreateFillet(10, 9, 3, RadiusiLens)
 			};
 
 			foreach (var fillet in fillets)

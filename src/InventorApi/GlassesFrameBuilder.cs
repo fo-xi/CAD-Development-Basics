@@ -71,6 +71,8 @@ namespace InventorApi
 				parameters.BridgeLength);
 			BuildEndElementRectangularLens(parameters.LensFrameHeight, parameters.LensFrameWidth,
 				parameters.BridgeLength, parameters.EndPieceLength);
+			_connector.Extrude(parameters.FrameWidth);
+			_connector.FilletsRectangularLens();
 		}
 
 

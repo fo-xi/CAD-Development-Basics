@@ -172,7 +172,7 @@ namespace InventorApi
 		/// <summary>
 		/// Создание множества сопряжений.
 		/// </summary>
-		public void Fillets()
+		public void FilletsRoundLens()
 		{
 			var fillets = new List<FilletDefinition>
 			{

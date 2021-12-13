@@ -328,12 +328,12 @@ namespace GlassesFrameViewModel
 			{
 				if (SelectedLensShape == LensShape.Круглая)
                 {
-					_glassesFrameBuilder.Build(_glassesFrameParameters);
+					_glassesFrameBuilder.BuilRoundGlassesFrame(_glassesFrameParameters);
 				}
 
 				if (SelectedLensShape == LensShape.Прямоугольная)
-				{ 
-					
+				{
+					_glassesFrameBuilder.BuilRectangularGlassesFrame(_glassesFrameParameters);
 				}
 			}
 		}

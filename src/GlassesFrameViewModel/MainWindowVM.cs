@@ -225,9 +225,8 @@ namespace GlassesFrameViewModel
 			get => _selectedLensShape;
 			set
 			{
-
 				_selectedLensShape = value;
-				ChoosingLensShape();
+				ClearLensErrors();
 				RaisePropertyChanged(nameof(SelectedLensShape));
 			}
 		}
@@ -339,19 +338,34 @@ namespace GlassesFrameViewModel
 		}
 
 		/// <summary>
-		/// Реакция при выборе формы очков 
+		/// Очищает ошибки свойств при переключении формы линз.
 		/// </summary>
-		private void ChoosingLensShape()
+		private void ClearLensErrors()
 		{
-			if (SelectedLensShape == LensShape.Прямоугольная)
+			switch (SelectedLensShape)
 			{
-				IsEnabledWidthLength = true;
-				IsEnabledRadius = false;
-			}
-			if (SelectedLensShape == LensShape.Круглая)
-			{
-				IsEnabledWidthLength = false;
-				IsEnabledRadius = true;
+				case LensShape.Круглая:
+				{
+					IsEnabledWidthLength = false;
+					IsEnabledRadius = true;
+					ClearErrors(Parameters.LensFrameWidth.ToString());
+					ClearErrors(Parameters.LensFrameHeight.ToString());
+					Validate(LensFrameRadius, Parameters.LensFrameRadius);
+					Validate(LensRadius, Parameters.LensRadius);
+					break;
+				}
+				case LensShape.Прямоугольная:
+				{
+
+					IsEnabledWidthLength = true;
+					IsEnabledRadius = false;
+
+					ClearErrors(Parameters.LensFrameRadius.ToString());
+					ClearErrors(Parameters.LensRadius.ToString());
+					Validate(LensFrameWidth, Parameters.LensFrameWidth);
+					Validate(LensFrameHeight, Parameters.LensFrameHeight);
+					break;
+				}
 			}
 		}
 
@@ -419,7 +433,7 @@ namespace GlassesFrameViewModel
 		/// Записывает все ошибки в строку.
 		/// </summary>
 		/// <returns>Строка.</returns>
-		public string AllErrors()
+		private string AllErrors()
 		{
 			var errors = string.Empty;
 
@@ -473,6 +487,8 @@ namespace GlassesFrameViewModel
 		public void OnErrorsChanged(string propertyName)
 		{
 			ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+			RaisePropertyChanged(nameof(HasErrors));
+			RaisePropertyChanged(nameof(Errors));
 		}
 
 		/// <summary>

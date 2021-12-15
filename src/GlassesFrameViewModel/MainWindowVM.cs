@@ -232,7 +232,12 @@ namespace GlassesFrameViewModel
 		}
 
 		/// <summary>
-		/// Доступ к полям длинны и ширины рамы ринзы.
+		/// Возвращает и задает название формы линзы.
+		/// </summary>
+		public Dictionary<LensShape, string> GetLensShapeName { get; }
+
+        /// <summary>
+		/// Доступ к полям длинны и ширины рамы линзы.
 		/// </summary>
 		public bool IsEnabledWidthLength
 		{
@@ -302,6 +307,12 @@ namespace GlassesFrameViewModel
 				{ Parameters.LensFrameHeight, "Высота рамы линзы" }
 			};
 
+            GetLensShapeName = new Dictionary<LensShape, string>
+            {
+                { LensShape.RoundShape, "Круглая" },
+                { LensShape.RectangularShape, "Прямоугольная" },
+            };
+
 			BridgeLength = _glassesFrameParameters.BridgeLength.ToString();
 			EndPieceLength = _glassesFrameParameters.EndPieceLength.ToString();
 			FrameWidth = _glassesFrameParameters.FrameWidth.ToString();
@@ -321,16 +332,17 @@ namespace GlassesFrameViewModel
 			if (HasErrors)
 			{
 				_messageBoxService.Show
-					("Не получается построить модель. Посмотрите ошибки!");
+					("Не получается построить модель. Посмотрите ошибки!", 
+                    "Ошибка", MessageType.Error);
 			}
 			else 
 			{
-				if (SelectedLensShape == LensShape.Круглая)
+				if (SelectedLensShape == LensShape.RoundShape)
                 {
 					_glassesFrameBuilder.BuilRoundGlassesFrame(_glassesFrameParameters);
 				}
 
-				if (SelectedLensShape == LensShape.Прямоугольная)
+				if (SelectedLensShape == LensShape.RectangularShape)
 				{
 					_glassesFrameBuilder.BuilRectangularGlassesFrame(_glassesFrameParameters);
 				}
@@ -344,7 +356,7 @@ namespace GlassesFrameViewModel
 		{
 			switch (SelectedLensShape)
 			{
-				case LensShape.Круглая:
+				case LensShape.RoundShape:
 				{
 					IsEnabledWidthLength = false;
 					IsEnabledRadius = true;
@@ -354,7 +366,7 @@ namespace GlassesFrameViewModel
 					Validate(LensRadius, Parameters.LensRadius);
 					break;
 				}
-				case LensShape.Прямоугольная:
+				case LensShape.RectangularShape:
 				{
 
 					IsEnabledWidthLength = true;

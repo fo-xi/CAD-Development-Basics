@@ -9,6 +9,8 @@
         /// Показывает окно сообщения.
         /// </summary>
         /// <param name="text">Сообщение.</param>
-        void Show(string text);
+        /// <param name="caption">Заголовок.</param>
+        /// <param name="messageType">Иконка.</param>
+        void Show(string text, string caption, MessageType messageType);
     }
 }

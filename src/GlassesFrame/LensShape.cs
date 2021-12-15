@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace GlassesFrame
 {
     /// <summary>
-    /// Форма линзы
+    /// Форма линзы.
     /// </summary>
     public enum LensShape
     {
-        Круглая,
-        Прямоугольная
+        RoundShape,
+        RectangularShape
     }
 }

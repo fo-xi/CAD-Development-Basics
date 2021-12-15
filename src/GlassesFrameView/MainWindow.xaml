@@ -69,7 +69,9 @@
 						Margin="5 0 0 0"
 						VerticalAlignment="Center"
 						IsEditable ="False"
-						ItemsSource="{Binding Source={StaticResource LensShape}}"
+						ItemsSource="{Binding GetLensShapeName}"
+						DisplayMemberPath="Value"
+						SelectedValuePath="Key"
 						SelectedValue="{Binding SelectedLensShape, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 				</Grid>
 

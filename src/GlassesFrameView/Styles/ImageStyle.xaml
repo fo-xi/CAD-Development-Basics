@@ -5,7 +5,7 @@
 			<DataTrigger Binding="{Binding IsEnabledRadius}" Value="true">
 				<Setter Property="Source" Value="../Resources/GlassesFrameRoundLenses.jpg"/>
             </DataTrigger>
-			<DataTrigger Binding="{Binding IsEnabledWidthLength}" Value="true">
+			<DataTrigger Binding="{Binding IsEnabledWidthHeight}" Value="true">
 				<Setter Property="Source" Value="../Resources/GlassesFrameRectangularLenses.jpg"/>
             </DataTrigger>
         </Style.Triggers>

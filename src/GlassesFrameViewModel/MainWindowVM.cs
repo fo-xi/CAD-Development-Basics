@@ -82,9 +82,9 @@ namespace GlassesFrameViewModel
 		private LensShape _selectedLensShape;
 
 		/// <summary>
-		///  Доступ к полям длинны и ширины рамы ринзы.
+		///  Доступ к полям ширины и высоты рамы ринзы.
 		/// </summary>
-		private bool _isEnabledWidthLength;
+		private bool _isEnabledWidthHeight;
 
 		/// <summary>
 		/// Доступ к полям радиуса линзы и рамы линзы.
@@ -237,16 +237,16 @@ namespace GlassesFrameViewModel
 		public Dictionary<LensShape, string> GetLensShapeName { get; }
 
         /// <summary>
-		/// Доступ к полям длинны и ширины рамы линзы.
+		/// Доступ к полям ширины и высоты рамы линзы.
 		/// </summary>
-		public bool IsEnabledWidthLength
+		public bool IsEnabledWidthHeight
 		{
-			get => _isEnabledWidthLength;
+			get => _isEnabledWidthHeight;
 			set
 			{
 
-				_isEnabledWidthLength = value;
-				RaisePropertyChanged(nameof(IsEnabledWidthLength));
+				_isEnabledWidthHeight = value;
+				RaisePropertyChanged(nameof(IsEnabledWidthHeight));
 			}
 		}
 
@@ -358,7 +358,7 @@ namespace GlassesFrameViewModel
 			{
 				case LensShape.RoundShape:
 				{
-					IsEnabledWidthLength = false;
+					IsEnabledWidthHeight = false;
 					IsEnabledRadius = true;
 					ClearErrors(Parameters.LensFrameWidth.ToString());
 					ClearErrors(Parameters.LensFrameHeight.ToString());
@@ -369,7 +369,7 @@ namespace GlassesFrameViewModel
 				case LensShape.RectangularShape:
 				{
 
-					IsEnabledWidthLength = true;
+					IsEnabledWidthHeight = true;
 					IsEnabledRadius = false;
 
 					ClearErrors(Parameters.LensFrameRadius.ToString());

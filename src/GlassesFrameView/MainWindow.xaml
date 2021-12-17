@@ -212,7 +212,7 @@
 				<Grid 
 					Grid.Row="6"
 					Margin="5"
-					Visibility="{Binding IsEnabledWidthLength, Converter={StaticResource VisibilityConverter}}">
+					Visibility="{Binding IsEnabledWidthHeight, Converter={StaticResource VisibilityConverter}}">
 
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*" />
@@ -227,7 +227,7 @@
 					<TextBox 
 						Name="LensFrameWidth" 
 						Grid.Column="1"
-						IsEnabled="{Binding IsEnabledWidthLength}"
+						IsEnabled="{Binding IsEnabledWidthHeight}"
 						Style="{StaticResource TextBoxStyle}"
 						Text ="{Binding LensFrameWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
@@ -239,7 +239,7 @@
 				<Grid 
 					Grid.Row="7"
 					Margin="5"
-					Visibility="{Binding IsEnabledWidthLength, Converter={StaticResource VisibilityConverter}}">
+					Visibility="{Binding IsEnabledWidthHeight, Converter={StaticResource VisibilityConverter}}">
 
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*" />
@@ -255,7 +255,7 @@
 					<TextBox 
 						Name="LensFrameHeight" 
 						Grid.Column="1"
-						IsEnabled="{Binding IsEnabledWidthLength}"
+						IsEnabled="{Binding IsEnabledWidthHeight}"
 						Style="{StaticResource TextBoxStyle}"
 						Text ="{Binding LensFrameHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 

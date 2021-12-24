@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace GlassesFrameViewModel
 {
+    /// <summary>
+    /// Тип сообщений.
+    /// </summary>
     public enum MessageType
     {
         Error,
